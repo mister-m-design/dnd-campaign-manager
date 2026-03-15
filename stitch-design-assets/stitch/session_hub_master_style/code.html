@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#fbbf24", // Warm Amber Gold
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0a0c14", // Obsidian Deep Blue
+                        "obsidian": {
+                            "900": "#0a0c14",
+                            "800": "#111521",
+                            "700": "#1e2536",
+                            "600": "#2d364d"
+                        }
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-obsidian-700 bg-obsidian-900 px-6 md:px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-6">
+<span class="material-symbols-outlined text-3xl">fort</span>
+</div>
+<h2 class="text-slate-100 text-lg font-bold leading-tight tracking-tight">Session Hub</h2>
+</div>
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-primary text-sm font-semibold leading-normal border-b-2 border-primary pb-1" href="#">Chronicles</a>
+<a class="text-slate-400 hover:text-slate-100 text-sm font-medium transition-colors" href="#">Quests</a>
+<a class="text-slate-400 hover:text-slate-100 text-sm font-medium transition-colors" href="#">Party</a>
+<a class="text-slate-400 hover:text-slate-100 text-sm font-medium transition-colors" href="#">Map</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4 md:gap-8 items-center">
+<label class="hidden sm:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full overflow-hidden">
+<div class="text-slate-400 flex border-none bg-obsidian-800 items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-obsidian-800 text-slate-100 focus:ring-0 placeholder:text-slate-500 text-sm" placeholder="Search chronicles..." value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-obsidian-800 text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-obsidian-800 text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-obsidian-700" data-alt="Portrait of the dungeon master" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCUkVlxXiC1tLP8mhw2RLy3eMvV4qTAXll4riyGevgva4eKW6lWbwCH410MBLZ-obQmCf021bkWtUD7UuagxDvjFhFaOPbEKNgV5kZaLESjS9s0U51TzNvnUhHGBSe9-kg9QE_m7BmD50O4-XiyvxnMFBnMPCCMr1Et8lpjPVVGjlvul30B6lMmdiydYa6mzrWELg3VV08HzIzTVCkk-CNJr3jaGBuBusnwO9_irV-eBOgv_gTrzdWKUQIYuVseNbtapxsqPQ1zfXo");'></div>
+</div>
+</header>
+<main class="flex flex-1 flex-col md:flex-row max-w-[1440px] mx-auto w-full px-4 md:px-10 py-8 gap-8">
+<!-- Sidebar Navigation -->
+<aside class="w-full md:w-64 flex flex-col gap-6 shrink-0">
+<div class="flex items-center gap-3 p-4 bg-obsidian-800/50 rounded-xl border border-obsidian-700">
+<div class="bg-primary/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary filled-icon">auto_stories</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-100 text-sm font-bold">Shadows of Eldoria</h1>
+<p class="text-slate-500 text-xs">Campaign Stage: Act III</p>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary text-obsidian-900 font-bold transition-all" href="#">
+<span class="material-symbols-outlined filled-icon">dashboard</span>
+<p class="text-sm">Chronicles</p>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-obsidian-800 hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<p class="text-sm">Quest Tracker</p>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-obsidian-800 hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">groups</span>
+<p class="text-sm">Party Management</p>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-obsidian-800 hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">map</span>
+<p class="text-sm">World Map</p>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-obsidian-800 hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm">Campaign Settings</p>
+</a>
+</div>
+<!-- Mini Map / Location Preview -->
+<div class="mt-4 rounded-xl overflow-hidden border border-obsidian-700 bg-obsidian-800 h-40 relative group">
+<div class="absolute inset-0 bg-cover bg-center opacity-60 group-hover:scale-110 transition-transform duration-500" data-alt="Topographic map of a mystical mountain range" data-location="The Great Spire" style="background-image: url('https://placeholder.pics/svg/300')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-obsidian-900 to-transparent"></div>
+<div class="absolute bottom-3 left-3">
+<p class="text-[10px] uppercase tracking-widest text-primary font-bold">Current Location</p>
+<p class="text-slate-100 font-bold text-sm">The Obsidian Sanctum</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<section class="flex-1 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="text-2xl font-bold text-slate-100">Session Chronicles</h2>
+<p class="text-slate-500">Record of your party's deeds and missteps</p>
+</div>
+<button class="bg-primary hover:bg-amber-400 text-obsidian-900 font-bold px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+<span>New Recap</span>
+</button>
+</div>
+<!-- Chronicle Cards List -->
+<div class="grid gap-4">
+<!-- Recap Card 1 -->
+<div class="bg-obsidian-800 border border-obsidian-700 rounded-xl overflow-hidden hover:border-primary/50 transition-colors group">
+<div class="flex flex-col md:flex-row">
+<div class="w-full md:w-64 h-48 md:h-auto overflow-hidden">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Dark obsidian palace with purple glowing crystals" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAosRjyTerPzQpJBWfZ0Xueu6NWzLJX7DmXjcNBvN0kEGXch5zTOvejkAjlu-opxZl510XCdiOUUYqmcgHlBuUnGPPHk2JsL-aKeI1xxbG-a4v0lBpO0WOSXrSwY_NLM1msALQtYxBlCJj7vFRBFTXtwZ2IEyzC7N8hEP88Jwd9dtJKYpXMfisK2lMqJcmfRXk19Y4OEEz5d4iw_Gxvd1TeszG8zQbF0MF4AuxE6F7WnXvT_3h5xHYJJQymsTpUkh3XHPoeKB7IS5I");'></div>
+</div>
+<div class="p-6 flex flex-col flex-1 gap-3">
+<div class="flex items-center justify-between">
+<span class="bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded">Session 42</span>
+<span class="text-slate-500 text-sm">14th of Aethelgard</span>
+</div>
+<h3 class="text-xl font-bold text-slate-100 group-hover:text-primary transition-colors">The Obsidian Sanctum</h3>
+<p class="text-slate-400 text-sm leading-relaxed line-clamp-2">
+                                The party successfully infiltrated the inner sanctum, narrowly avoiding the Golem sentries. Thistledown found the first soul fragment within the altar of shadows.
+                            </p>
+<div class="mt-2 flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-obsidian-800 bg-slate-700" data-alt="User avatar" title="Player 1"></div>
+<div class="w-8 h-8 rounded-full border-2 border-obsidian-800 bg-slate-600" data-alt="User avatar" title="Player 2"></div>
+<div class="w-8 h-8 rounded-full border-2 border-obsidian-800 bg-slate-500" data-alt="User avatar" title="Player 3"></div>
+</div>
+<button class="text-primary text-sm font-bold flex items-center gap-1 hover:underline">
+                                    Read Full Recap
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Recap Card 2 -->
+<div class="bg-obsidian-800 border border-obsidian-700 rounded-xl overflow-hidden hover:border-primary/50 transition-colors group">
+<div class="flex flex-col md:flex-row">
+<div class="w-full md:w-64 h-48 md:h-auto overflow-hidden">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Mystical forest with thick blue fog" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDmlRpC7tDje0pP2GRPMsRvmWf_GgNR-YJQ_-JNwtKMMdRxqRgU90hGZCCnpAgolDgnGKJ6ojChEl4jBmKKV1HKPdzwCB3y6YxwUOWpO--MGcxzmYYWmAq-Qmu0mLlqBeOOJepXerueHEVDYeznkTBsuc8oL5jn7RzPgU_BUEOFQqszdD-rvt2i0LXRuYjjbeIZv2sBr0Yz0r4Apx68PcRS4OVO8MZ27vKlQMpti4WTZEt-0l8AcMmX6xOfKHRFKseZk4vR1VcxVvY");'></div>
+</div>
+<div class="p-6 flex flex-col flex-1 gap-3">
+<div class="flex items-center justify-between">
+<span class="bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded">Session 41</span>
+<span class="text-slate-500 text-sm">12th of Aethelgard</span>
+</div>
+<h3 class="text-xl font-bold text-slate-100 group-hover:text-primary transition-colors">Whispers in the Wold</h3>
+<p class="text-slate-400 text-sm leading-relaxed line-clamp-2">
+                                Navigating the shifting mists of the Elderwold, the party encountered the Spirit of the Grove. Kaelen negotiated safe passage in exchange for the Silver Bough.
+                            </p>
+<div class="mt-2 flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-obsidian-800 bg-slate-700" data-alt="User avatar"></div>
+<div class="w-8 h-8 rounded-full border-2 border-obsidian-800 bg-slate-600" data-alt="User avatar"></div>
+</div>
+<button class="text-primary text-sm font-bold flex items-center gap-1 hover:underline">
+                                    Read Full Recap
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Side Panel: Quest Tracker -->
+<aside class="w-full md:w-80 flex flex-col gap-6">
+<div class="bg-obsidian-800 border border-obsidian-700 rounded-xl flex flex-col overflow-hidden">
+<div class="p-4 border-b border-obsidian-700 flex items-center justify-between bg-obsidian-900/50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">military_tech</span>
+<h3 class="font-bold text-slate-100">Active Quests</h3>
+</div>
+<span class="bg-obsidian-700 text-slate-300 text-[10px] font-bold px-2 py-1 rounded">3 Active</span>
+</div>
+<div class="p-2 flex flex-col gap-2">
+<!-- Quest Item 1 -->
+<div class="p-3 bg-obsidian-900/40 rounded-lg border-l-4 border-primary hover:bg-obsidian-700 transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-bold text-slate-100 group-hover:text-primary transition-colors">The Soul Fragment</h4>
+<span class="text-[10px] text-primary font-bold">MAIN</span>
+</div>
+<p class="text-xs text-slate-400 mb-3">Retrieve all 3 fragments to seal the Rift of Aethelgard.</p>
+<div class="w-full bg-obsidian-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[33%] rounded-full shadow-[0_0_8px_rgba(251,191,36,0.5)]"></div>
+</div>
+<div class="flex justify-between mt-1">
+<span class="text-[9px] text-slate-500 uppercase font-bold tracking-tighter">Progress</span>
+<span class="text-[9px] text-slate-300 font-bold">1 / 3 Found</span>
+</div>
+</div>
+<!-- Quest Item 2 -->
+<div class="p-3 bg-obsidian-900/40 rounded-lg border-l-4 border-slate-600 hover:bg-obsidian-700 transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-bold text-slate-100 group-hover:text-slate-300">Shadow Stalker</h4>
+<span class="text-[10px] text-slate-500 font-bold">SIDE</span>
+</div>
+<p class="text-xs text-slate-400 mb-2">Track the mysterious figure following the party since session 38.</p>
+<div class="flex items-center gap-1 text-[10px] text-amber-500/80">
+<span class="material-symbols-outlined text-xs">location_on</span>
+<span>The Great Spire</span>
+</div>
+</div>
+<!-- Quest Item 3 (Completed/Dimmed) -->
+<div class="p-3 bg-obsidian-900/20 rounded-lg border-l-4 border-green-600 opacity-60">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-bold text-slate-400 line-through">Safe Passage</h4>
+<span class="material-symbols-outlined text-green-500 text-sm filled-icon">check_circle</span>
+</div>
+<p class="text-[10px] text-slate-500 italic">Negotiated with the Spirit of the Grove.</p>
+</div>
+</div>
+<div class="p-4 mt-auto border-t border-obsidian-700">
+<button class="w-full text-center text-slate-400 text-sm font-medium hover:text-primary transition-colors">
+                        View All Quests
+                    </button>
+</div>
+</div>
+<!-- Loot/Party Inventory Quick View -->
+<div class="bg-obsidian-800 border border-obsidian-700 rounded-xl p-4">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">backpack</span>
+<h3 class="font-bold text-slate-100">Party Loot</h3>
+</div>
+<div class="grid grid-cols-4 gap-2">
+<div class="aspect-square rounded bg-obsidian-900 border border-obsidian-700 flex items-center justify-center hover:border-primary transition-colors cursor-help" title="Soul Fragment">
+<span class="material-symbols-outlined text-primary text-xl">diamond</span>
+</div>
+<div class="aspect-square rounded bg-obsidian-900 border border-obsidian-700 flex items-center justify-center hover:border-primary transition-colors cursor-help" title="Health Potion">
+<span class="material-symbols-outlined text-red-500 text-xl">e911_emergency</span>
+</div>
+<div class="aspect-square rounded bg-obsidian-900 border border-obsidian-700 flex items-center justify-center hover:border-primary transition-colors cursor-help" title="Ancient Map">
+<span class="material-symbols-outlined text-amber-200/50 text-xl">map</span>
+</div>
+<div class="aspect-square rounded bg-obsidian-900 border border-obsidian-700 flex items-center justify-center border-dashed text-slate-600">
+<span class="material-symbols-outlined text-xl">add</span>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-obsidian-700 flex justify-between items-center">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-sm filled-icon">database</span>
+<span class="text-slate-100 text-sm font-bold">1,240</span>
+</div>
+<span class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Gold Pieces</span>
+</div>
+</div>
+</aside>
+</main>
+<!-- Footer Space -->
+<footer class="mt-auto py-6 border-t border-obsidian-700 text-center bg-obsidian-900/50">
+<p class="text-slate-600 text-xs">Chronicles of Eldoria — Session Hub v2.4.0</p>
+</footer>
+</div>
+</body></html>

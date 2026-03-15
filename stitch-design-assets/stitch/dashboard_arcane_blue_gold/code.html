@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: 'class', theme: {extend: {colors: {primary: '#f0a119', 'background-light': '#f6f6f8', 'background-dark': '#0a0e14'}, fontFamily: {display: 'Inter'}, borderRadius: {DEFAULT: '0.25rem', lg: '0.5rem', xl: '0.75rem', full: '9999px'}}}};</script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .parchment-card {
+            background: linear-gradient(135deg, rgba(16, 20, 28, 0.6) 0%, rgba(10, 14, 20, 0.8) 100%);
+            border: 1px solid rgba(240, 161, 25, 0.15);
+        }
+        .glow-accent {
+            box-shadow: 0 0 20px rgba(240, 161, 25, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="w-64 flex-shrink-0 bg-background-dark border-r border-primary/10 flex flex-col justify-between p-4">
+<div class="flex flex-col gap-8">
+<!-- Logo Section -->
+<div class="flex items-center gap-3 px-2">
+<div class="size-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">auto_stories</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-100 text-base font-bold leading-none">Arcane Ledger</h1>
+<p class="text-primary/60 text-[10px] uppercase tracking-widest mt-1">Campaign Manager</p>
+</div>
+</div>
+<!-- Nav Items -->
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary/10 text-primary border border-primary/20" href="#">
+<span class="material-symbols-outlined fill-[1]">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:bg-primary/5 hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Characters</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:bg-primary/5 hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">swords</span>
+<span class="text-sm font-medium">Campaigns</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:bg-primary/5 hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="text-sm font-medium">Library</span>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-2 border-t border-primary/10 pt-4">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:bg-primary/5 hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+<!-- Top Bar -->
+<header class="h-16 border-b border-primary/10 flex items-center justify-between px-8 bg-background-dark/50 backdrop-blur-md sticky top-0 z-10">
+<div class="flex items-center gap-4 text-sm text-slate-400">
+<span class="hover:text-primary cursor-pointer">Dashboard</span>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search -->
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xl">search</span>
+<input class="w-full bg-primary/5 border border-primary/10 rounded-full pl-10 pr-4 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:border-primary outline-none text-slate-200" placeholder="Search the lexicon..." type="text"/>
+</div>
+<!-- Profile -->
+<div class="flex items-center gap-3 pl-6 border-l border-primary/10">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-slate-100">Valerius</p>
+<p class="text-[10px] text-primary/70 uppercase">Game Master</p>
+</div>
+<div class="size-9 rounded-full bg-gradient-to-tr from-primary to-blue-300 p-0.5">
+<img class="size-full rounded-full object-cover" data-alt="User avatar of Valerius" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDJsZYMwrsx8GuzqLL-oRRl0ws1QahaHhvsoOnZsXxgZdb2eYwRdfqbPF93ZkNxO-YEKCoiUipwur28uFu3rGNVtXCsfUk_2MnfWXzeGiBe_9JPUTQ9-_gGchdA3IltZLcvWKhqxe40t1EpCw44_-wbA7BsUXp0_DU6gxm_AtO506bNKDKFFQnNk1GAkZr0Iqyqsh-0M0vOJk5jWhNcwQWajNUOaTiF-HEhK68dNKbfRrpTfzpDWbi5mCdjuGokaiNHn3BVda73Dg"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-8 max-w-7xl mx-auto w-full">
+<!-- Welcome Header -->
+<div class="mb-10">
+<h2 class="text-4xl font-black tracking-tight text-slate-100 mb-2">Good evening, Valerius.</h2>
+<p class="text-primary/80 font-medium italic flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">auto_awesome</span>
+                        The realm awaits your next decree.
+                    </p>
+</div>
+<!-- Quick Actions -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+<button class="flex items-center justify-center gap-3 bg-primary text-background-dark font-bold py-4 rounded-xl hover:bg-primary/90 transition-all shadow-lg group shadow-primary/20"><span class="material-symbols-outlined group-hover:scale-110 transition-transform">person_add</span> Create New Character</button>
+<button class="flex items-center justify-center gap-3 bg-primary/10 border border-primary/30 text-primary font-bold py-4 rounded-xl hover:bg-primary/20 transition-all group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">edit_note</span>
+                        Start Session Notes
+                    </button>
+<button class="flex items-center justify-center gap-3 bg-primary/10 border border-primary/30 text-primary font-bold py-4 rounded-xl hover:bg-primary/20 transition-all group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">swords</span>
+                        Prep Encounter
+                    </button>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Campaigns & Characters -->
+<div class="lg:col-span-2 space-y-10">
+<!-- Active Campaigns -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">fort</span>
+                                    Active Campaigns
+                                </h3>
+<button class="text-xs text-primary uppercase font-bold tracking-widest hover:underline">View All</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Campaign Card 1 -->
+<div class="parchment-card rounded-2xl overflow-hidden group hover:border-primary/40 transition-all flex flex-col">
+<div class="h-32 bg-slate-800 relative">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark to-transparent opacity-60"></div>
+<img class="w-full h-full object-cover" data-alt="Gothic dark castle landscape" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ0LZavPz1OkAH9aGarNvFOSIH3xg1CKku1ETu_Rp7vFxDLRZBqr-L-2EKNuh0P7KYaX4IRjGA3agFrFEeMp4Vbtob_brcTZM9v8LICRb4bgdCTtoZ2z-7WsK9t3TSc3bMd_TSvjNodhuaKM9Ff8q8AvLl3kDv3wLXyGnd3oIEvsvXHf4spIEBCpeuYZ2i6bKW-45ylpwSypMCYPCQW7ys2iTHDyds9-TnpK9L2PTHMHpDejSXB47SwUA2nFfs6OOeQhhh7_6b8tA"/>
+<div class="absolute top-3 left-3 bg-green-500/20 text-green-400 text-[10px] font-bold px-2 py-0.5 rounded-full border border-green-500/30 backdrop-blur-sm flex items-center gap-1">
+<span class="size-1.5 rounded-full bg-green-400 animate-pulse"></span> ACTIVE
+                                        </div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<h4 class="text-lg font-bold text-slate-100 mb-1">The Shattered Crown</h4>
+<div class="flex flex-wrap gap-x-4 gap-y-2 mt-auto pt-4 border-t border-primary/10">
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-500 uppercase font-bold tracking-tighter">Next Session</span>
+<span class="text-sm font-medium text-primary">Friday, 8:00 PM</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-500 uppercase font-bold tracking-tighter">Party Level</span>
+<span class="text-sm font-medium text-slate-200">LVL 12</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Campaign Card 2 -->
+<div class="parchment-card rounded-2xl overflow-hidden group hover:border-primary/40 transition-all flex flex-col">
+<div class="h-32 bg-slate-800 relative">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark to-transparent opacity-60"></div>
+<img class="w-full h-full object-cover" data-alt="Abstract dark mystical void" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBelAZcr34fCHGw1f4b_rvaimE3N_vxc-HpHhkwP5avR8zU0Fk19fVuS3GMGFVKj-L5WqaGLSXbBgRjbmUasTHO_86A50P90TdkKLXC-Wo7HMdUL7piFfJUbluPJZfFqqG_ix0q8es-wnEVwyexSOMoqH57qS4WhKqfyrDAFeGIRl3geMSa_fnEb9I7Poq00DVWEnECRRpWZGyH6IHgj9Yr4i7N_v3Q8LEiQ5RJXB9LigQXqOMr6_caJ39smxYDNjhXfheQ5rpwGAU"/>
+<div class="absolute top-3 left-3 bg-primary/20 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full border border-primary/30 backdrop-blur-sm flex items-center gap-1">
+                                            HIATUS
+                                        </div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<h4 class="text-lg font-bold text-slate-100 mb-1">Whispers of the Void</h4>
+<div class="flex flex-wrap gap-x-4 gap-y-2 mt-auto pt-4 border-t border-primary/10">
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-500 uppercase font-bold tracking-tighter">Next Session</span>
+<span class="text-sm font-medium text-primary">TBD</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-500 uppercase font-bold tracking-tighter">Party Level</span>
+<span class="text-sm font-medium text-slate-200">LVL 4</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Characters -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">shield_person</span>
+                                    Recent Characters
+                                </h3>
+<button class="text-xs text-primary uppercase font-bold tracking-widest hover:underline">Manage All</button>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+<!-- Character 1 -->
+<div class="parchment-card p-4 rounded-xl flex flex-col items-center text-center group hover:scale-[1.02] transition-transform">
+<div class="size-16 rounded-full bg-slate-800 border-2 border-primary/20 mb-3 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a fantasy warrior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8-xBgtMvrlnMMxFZ00FF4uQhDuup4xngizujp1_aDf-3myzGSd5iiMDNw0HV5cgt79xf0vZBvFnB2gNbbnMakJoyWvnesFDB1NiT-U6ZdTb2ebRSNnBLCQG9w9zfxJ3QT18aPVAjZsTiuZJpeejYfMK10QsaDjRv9WT2z2DvNdOY-_F8oLwXR3EY5q_1zUu1uNBz0HWm1iHwh6ENiD8B6vMhFy_Rw5vGPD_JmOQeWqzUu4TQLMy5tfdBkeYuSwDPmjNcwp3VlimE"/>
+</div>
+<h5 class="text-sm font-bold text-slate-100 truncate w-full">Thrain Ironfoot</h5>
+<p class="text-[10px] text-slate-400">Paladin • LVL 12</p>
+</div>
+<!-- Character 2 -->
+<div class="parchment-card p-4 rounded-xl flex flex-col items-center text-center group hover:scale-[1.02] transition-transform">
+<div class="size-16 rounded-full bg-slate-800 border-2 border-primary/20 mb-3 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a female elf mage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzepGwEoX5tMe5nU_KTrVnvi9LzQZX-Vjp7gZk2Q-lpE-1K053YRdI0KO4N8ZDZoCPaVuVTseqrNBoMYUeLbV-bwxZmnqXI1jXRh7OXYKavPMdTNc0P-nsPWD-pB_Dkgq6aJAAT-h0gdR6uJas1aEYjV0vqvnzN_v1i9rvepufjeKIJizZBs8yxdex7F4QIrOOZluLXchRzUk6pvR91bOGqUjir-cAKPTIEkX3Z1PdX83fHUHuhuVSs4YqZ8FdNlUJr44T1wDxMwE"/>
+</div>
+<h5 class="text-sm font-bold text-slate-100 truncate w-full">Lyra Moonshade</h5>
+<p class="text-[10px] text-slate-400">Rogue • LVL 11</p>
+</div>
+<!-- Character 3 -->
+<div class="parchment-card p-4 rounded-xl flex flex-col items-center text-center group hover:scale-[1.02] transition-transform">
+<div class="size-16 rounded-full bg-slate-800 border-2 border-primary/20 mb-3 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a wizard" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfC0R4vvOUKhVUuwprJDFrD1Hi6DCJkiZNs9gpG-QpHoQ_AwAJWD0II45o4_MIvi3nWit-DaaCH9Y7dfJfVaDalUY1JYc0gP0L5KrSJtLnBTMBTB4ZRwRDrUDIx5cdQa1GKRXQ6zGqRFwzO5KmB5_qzeSocr9a5RxOnXuCdo3cogRj2Ei9jt9ZXWz2sMnniIl9iw6AYJNc12-QdQ0jvYZ9Py7h8-wgcVAQ4wnJ2MPqHH36Vtpt7OBf8RCK8JC9_ScEo4Jf6mExoeM"/>
+</div>
+<h5 class="text-sm font-bold text-slate-100 truncate w-full">Kaelen Voss</h5>
+<p class="text-[10px] text-slate-400">Wizard • LVL 8</p>
+</div>
+<!-- Character 4 -->
+<div class="parchment-card p-4 rounded-xl flex items-center justify-center border-dashed border-2 border-primary/10 group cursor-pointer hover:bg-primary/5 transition-colors">
+<div class="flex flex-col items-center text-slate-500 group-hover:text-primary">
+<span class="material-symbols-outlined text-3xl">add_circle</span>
+<span class="text-[10px] font-bold mt-1 uppercase">New</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Sidebar Widgets -->
+<div class="space-y-8">
+<!-- Upcoming Sessions -->
+<div class="parchment-card rounded-2xl p-6 glow-accent">
+<h3 class="text-sm font-bold text-primary uppercase tracking-widest mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">calendar_month</span>
+                                Upcoming Sessions
+                            </h3>
+<div class="space-y-6">
+<!-- Session Item -->
+<div class="relative pl-6 before:content-[''] before:absolute before:left-0 before:top-1 before:bottom-0 before:w-0.5 before:bg-primary/30">
+<div class="absolute left-[-3px] top-1 size-2 rounded-full bg-primary border border-background-dark"></div>
+<p class="text-[10px] text-primary font-bold">JULY 24 • 8:00 PM</p>
+<h4 class="text-sm font-bold text-slate-100 mt-0.5">The Shattered Crown</h4>
+<p class="text-xs text-slate-400 mt-1">Act III: The Siege of Oakhaven</p>
+<div class="mt-3 flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="size-6 rounded-full border-2 border-background-dark bg-slate-700 overflow-hidden"><img alt="" data-alt="Player avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVsHsyPnnaKZfYh5nHGuXoMk323yaR-h3LkP-5Fe_02J_92DEZqg_HKDz1ZjKR2PQ_ZS_VY0jzqKLVoJazVsE9RlLcupP9tiBw1Fa-5XtAml4hzCRY-dUauXhob1wwvNJdTattKs_nlwmxEPhiYArsiZnaM9lX2Mxq_aVI_rOwxOm7SN1bVoKVoq9yuP2zfMwj6p4-v1yHDrr6x6srbpNxRhB3N2k5GD0Uz30182r0x0a-a-2iJncp3tB-njLNHfQp_4T62wsTbHs"/></div>
+<div class="size-6 rounded-full border-2 border-background-dark bg-slate-700 overflow-hidden"><img alt="" data-alt="Player avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtRqtx-uI9bmo548gVIdJIpoAjV-Og5j5kBn_QMDjTYEANjIJRpFsBN7V9iuTjBbfWxiulfrYJ2bwBwpC_emLj8lCi3DDEWFYouLhzLbD_Rw9348EUZ8csH28qGMLt4qPe1gBcP3sBhjx18S_7t5zV9HflpNW3hDzk9LB4FZ7Lxq8Wy9msxWUaJ7_HnrNDO8xMTcTz0LbFVz9WZmOuRsqRPBUGZSE_3MkFpZIpN6lSjtC63bKOvWzwKzwGXsSVCymHNBoSgN_0Ztc"/></div>
+<div class="size-6 rounded-full border-2 border-background-dark bg-slate-700 overflow-hidden"><img alt="" data-alt="Player avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-BJKcse5I1lMmOPvFY8gFkjsN9o-MU2v61AxE48zOMr0b8AmSvnbQcxKTbF9SWLDNOwmuB8F9wR3FLAP7lFA_9GeOtvDZTIb53bvmoZOeBiGL2WFcBZiYGn_AuQDc_9kdKI_JUICwWX9DrzUJ3vTMEWlT8-KDwQnrdRfuPicE10GdN2sGp9wxw6gDdxKSGlHrTP_DYa08VJx3I2AK34_QSc1mE5DOE70N523uSAjO1L1_wfFlMPOSqREqJI1cI4DbH1WK_oJhrOE"/></div>
+<div class="size-6 rounded-full border-2 border-background-dark bg-slate-800 flex items-center justify-center text-[8px] font-bold text-slate-400">+2</div>
+</div>
+<span class="text-[10px] bg-green-500/10 text-green-400 px-2 py-0.5 rounded font-bold">4/5 RSVP</span>
+</div>
+</div>
+<!-- Session Item -->
+<div class="relative pl-6 opacity-60">
+<div class="absolute left-[-3px] top-1 size-2 rounded-full bg-slate-600 border border-background-dark"></div>
+<p class="text-[10px] text-slate-500 font-bold uppercase">Aug 02 • 7:30 PM</p>
+<h4 class="text-sm font-bold text-slate-300 mt-0.5">Whispers of the Void</h4>
+<p class="text-xs text-slate-500 mt-1">Session Zero (New Players)</p>
+<div class="mt-3">
+<button class="w-full py-1.5 rounded-lg border border-primary/20 text-[10px] font-bold uppercase tracking-wider text-primary hover:bg-primary/10 transition-colors">Manage Attendance</button>
+</div>
+</div>
+</div>
+</div>
+<!-- System Status / Lore Widget -->
+<div class="bg-primary/5 rounded-2xl p-6 border border-primary/10">
+<h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">history_edu</span>
+                                Dungeon Master Log
+                            </h3>
+<div class="space-y-3">
+<p class="text-xs text-slate-400 leading-relaxed italic">"The party has reached the Dragon's Spine. Valerius, remember to check the cold weather survival rules before Friday's session."</p>
+<div class="flex items-center gap-3 pt-2">
+<span class="material-symbols-outlined text-primary/60 text-sm">notifications</span>
+<span class="text-[10px] font-bold text-primary/80 uppercase">Reminder Set: 2 days prior</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Character Sheet - Valerius Moonwhisper</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#fbbf24", // Warm Amber Gold
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0a0c14", // Deep Obsidian Blue
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .obsidian-panel {
+            background-color: rgba(25, 30, 45, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(251, 191, 36, 0.1);
+        }
+        .stats-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background-color: rgba(10, 12, 20, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between border-b border-primary/20 px-6 py-4 bg-background-dark/50">
+<div class="flex items-center gap-4">
+<div class="size-10 bg-primary/20 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">shield_person</span>
+</div>
+<div>
+<h2 class="text-slate-100 text-lg font-bold leading-tight">Valerius Moonwhisper</h2>
+<p class="text-primary text-xs font-semibold uppercase tracking-wider">Level 5 Paladin • Oath of Devotion</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-800 text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-800 text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+<div class="size-10 rounded-full border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Noble paladin portrait with silver hair" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLD8vnEgFjT6Q-NkfV7igcB_Pqj_aP92gslrx6vZdL4GUtK0tnBo-aPZ7-C22EoOkUJfa1AfgRyN3H-RJkgfzDzu7s2qW2LenaogOYtTSInxezKjcBT55hul1-dtrPdRWBL-x2MC2hGPBrTq0YQ3pTB_RJpP-OnStKIOTbEgJHnPb2OQ9KNdI9InDtqI6WtmgQR7B40pw0GtjbqfZbqN0m3hsFu9SUw2iAKIM4bcebbliZqI7ISxFJ4Ii3eu07HH9FGaBxa2pgVTQ"/>
+</div>
+</div>
+</header>
+<!-- Sticky Stats Bar -->
+<div class="stats-sticky px-6 py-4">
+<div class="max-w-5xl mx-auto flex flex-wrap gap-4 items-center justify-between">
+<div class="flex gap-6 overflow-x-auto pb-2 sm:pb-0">
+<div class="flex items-center gap-3 px-4 py-2 rounded-xl obsidian-panel border-l-4 border-l-red-500">
+<span class="material-symbols-outlined text-red-500">favorite</span>
+<div>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">Hit Points</p>
+<p class="text-xl font-black text-slate-100 leading-none">45 <span class="text-sm font-medium text-slate-500">/ 45</span></p>
+</div>
+</div>
+<div class="flex items-center gap-3 px-4 py-2 rounded-xl obsidian-panel border-l-4 border-l-primary">
+<span class="material-symbols-outlined text-primary">shield</span>
+<div>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">Armor Class</p>
+<p class="text-xl font-black text-slate-100 leading-none">18</p>
+</div>
+</div>
+<div class="flex items-center gap-3 px-4 py-2 rounded-xl obsidian-panel border-l-4 border-l-blue-400">
+<span class="material-symbols-outlined text-blue-400">bolt</span>
+<div>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">Initiative</p>
+<p class="text-xl font-black text-slate-100 leading-none">+2</p>
+</div>
+</div>
+<div class="flex items-center gap-3 px-4 py-2 rounded-xl obsidian-panel border-l-4 border-l-emerald-400">
+<span class="material-symbols-outlined text-emerald-400">directions_run</span>
+<div>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">Speed</p>
+<p class="text-xl font-black text-slate-100 leading-none">30ft</p>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="bg-primary hover:bg-primary/80 text-background-dark px-4 py-2 rounded-lg font-bold text-sm transition-all shadow-lg shadow-primary/20">
+                    Long Rest
+                </button>
+</div>
+</div>
+</div>
+<!-- Main Content Area -->
+<main class="max-w-5xl mx-auto p-6">
+<!-- Tabs -->
+<div class="flex gap-1 border-b border-slate-800 mb-8 overflow-x-auto">
+<button class="px-6 py-3 border-b-2 border-primary text-primary font-bold text-sm whitespace-nowrap">OVERVIEW</button>
+<button class="px-6 py-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 font-bold text-sm transition-all whitespace-nowrap">INVENTORY</button>
+<button class="px-6 py-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 font-bold text-sm transition-all whitespace-nowrap">SPELLS (2/2 Slots)</button>
+<button class="px-6 py-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 font-bold text-sm transition-all whitespace-nowrap">BIOGRAPHY</button>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Sidebar: Attributes & Skills -->
+<div class="lg:col-span-1 space-y-6">
+<!-- Attributes Grid -->
+<div class="grid grid-cols-2 gap-3">
+<div class="obsidian-panel rounded-xl p-4 text-center border-t border-slate-700/50">
+<p class="text-xs font-bold text-slate-500 uppercase">Strength</p>
+<p class="text-2xl font-black text-primary">18</p>
+<span class="bg-primary/20 text-primary px-2 py-0.5 rounded text-sm font-bold">+4</span>
+</div>
+<div class="obsidian-panel rounded-xl p-4 text-center border-t border-slate-700/50">
+<p class="text-xs font-bold text-slate-500 uppercase">Dexterity</p>
+<p class="text-2xl font-black text-slate-200">10</p>
+<span class="bg-slate-700/50 text-slate-400 px-2 py-0.5 rounded text-sm font-bold">+0</span>
+</div>
+<div class="obsidian-panel rounded-xl p-4 text-center border-t border-slate-700/50">
+<p class="text-xs font-bold text-slate-500 uppercase">Constitution</p>
+<p class="text-2xl font-black text-slate-200">14</p>
+<span class="bg-slate-700/50 text-slate-400 px-2 py-0.5 rounded text-sm font-bold">+2</span>
+</div>
+<div class="obsidian-panel rounded-xl p-4 text-center border-t border-slate-700/50">
+<p class="text-xs font-bold text-slate-500 uppercase">Intelligence</p>
+<p class="text-2xl font-black text-slate-200">8</p>
+<span class="bg-slate-700/50 text-slate-400 px-2 py-0.5 rounded text-sm font-bold">-1</span>
+</div>
+<div class="obsidian-panel rounded-xl p-4 text-center border-t border-slate-700/50">
+<p class="text-xs font-bold text-slate-500 uppercase">Wisdom</p>
+<p class="text-2xl font-black text-slate-200">12</p>
+<span class="bg-slate-700/50 text-slate-400 px-2 py-0.5 rounded text-sm font-bold">+1</span>
+</div>
+<div class="obsidian-panel rounded-xl p-4 text-center border-t border-slate-700/50">
+<p class="text-xs font-bold text-slate-500 uppercase">Charisma</p>
+<p class="text-2xl font-black text-primary">16</p>
+<span class="bg-primary/20 text-primary px-2 py-0.5 rounded text-sm font-bold">+3</span>
+</div>
+</div>
+<!-- Skills List -->
+<div class="obsidian-panel rounded-xl p-5">
+<h3 class="text-slate-300 font-bold text-sm mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">list_alt</span>
+                        CORE SKILLS
+                    </h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between text-sm group cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full bg-primary shadow-[0_0_8px_rgba(251,191,36,0.6)]"></div>
+<span class="text-slate-400 group-hover:text-slate-100 transition-colors">Athletics</span>
+</div>
+<span class="font-bold text-slate-200">+7</span>
+</div>
+<div class="flex items-center justify-between text-sm group cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full border border-slate-600"></div>
+<span class="text-slate-400 group-hover:text-slate-100 transition-colors">Insight</span>
+</div>
+<span class="font-bold text-slate-200">+4</span>
+</div>
+<div class="flex items-center justify-between text-sm group cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full bg-primary shadow-[0_0_8px_rgba(251,191,36,0.6)]"></div>
+<span class="text-slate-400 group-hover:text-slate-100 transition-colors">Persuasion</span>
+</div>
+<span class="font-bold text-slate-200">+6</span>
+</div>
+<div class="flex items-center justify-between text-sm group cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full border border-slate-600"></div>
+<span class="text-slate-400 group-hover:text-slate-100 transition-colors">Religion</span>
+</div>
+<span class="font-bold text-slate-200">+2</span>
+</div>
+<div class="flex items-center justify-between text-sm group cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full bg-primary shadow-[0_0_8px_rgba(251,191,36,0.6)]"></div>
+<span class="text-slate-400 group-hover:text-slate-100 transition-colors">Medicine</span>
+</div>
+<span class="font-bold text-slate-200">+4</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Content Area: Attacks & Actions -->
+<div class="lg:col-span-2 space-y-6">
+<!-- Combat Actions Section -->
+<div>
+<h3 class="text-slate-400 font-bold text-xs uppercase tracking-[0.2em] mb-4">Attacks &amp; Spellcasting</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Attack Card 1 -->
+<div class="obsidian-panel rounded-xl p-4 border-l-2 border-primary hover:bg-slate-800/40 transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-slate-100">Sunblade Longsword</h4>
+<span class="text-[10px] bg-primary/10 text-primary px-2 py-1 rounded font-black uppercase">Melee</span>
+</div>
+<div class="flex gap-4 items-center">
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-500 font-bold uppercase">To Hit</span>
+<span class="text-xl font-black text-slate-100">+7</span>
+</div>
+<div class="h-8 w-px bg-slate-800"></div>
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-500 font-bold uppercase">Damage</span>
+<span class="text-xl font-black text-slate-100">1d8+5 <span class="text-xs font-normal text-primary">Radiant</span></span>
+</div>
+</div>
+<p class="mt-3 text-xs text-slate-400 leading-relaxed">Versatile (1d10), Finesse, Light. On a hit, target glows with dim light until your next turn.</p>
+</div>
+<!-- Attack Card 2 -->
+<div class="obsidian-panel rounded-xl p-4 border-l-2 border-slate-700 hover:bg-slate-800/40 transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-slate-100">Hand Crossbow</h4>
+<span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-1 rounded font-black uppercase">Ranged</span>
+</div>
+<div class="flex gap-4 items-center">
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-500 font-bold uppercase">To Hit</span>
+<span class="text-xl font-black text-slate-100">+3</span>
+</div>
+<div class="h-8 w-px bg-slate-800"></div>
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-500 font-bold uppercase">Damage</span>
+<span class="text-xl font-black text-slate-100">1d6+0 <span class="text-xs font-normal text-slate-500">Piercing</span></span>
+</div>
+</div>
+<p class="mt-3 text-xs text-slate-400 leading-relaxed">Range 30/120. Ammunition, Loading, Light.</p>
+</div>
+<!-- Special Ability Card -->
+<div class="obsidian-panel rounded-xl p-4 border-l-2 border-emerald-500/50 md:col-span-2">
+<div class="flex justify-between items-center mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-400">flare</span>
+<h4 class="font-bold text-slate-100">Divine Smite</h4>
+</div>
+<div class="flex gap-1">
+<div class="size-3 rounded-full bg-primary"></div>
+<div class="size-3 rounded-full bg-primary"></div>
+<div class="size-3 rounded-full border border-slate-700"></div>
+<div class="size-3 rounded-full border border-slate-700"></div>
+<span class="text-[10px] text-slate-500 font-bold ml-2">Slots</span>
+</div>
+</div>
+<p class="text-xs text-slate-400 leading-relaxed">When you hit a creature with a melee weapon attack, you can expend one spell slot to deal radiant damage to the target, in addition to the weapon's damage. The extra damage is 2d8 for a 1st-level spell slot.</p>
+</div>
+</div>
+</div>
+<!-- Features Section -->
+<div>
+<h3 class="text-slate-400 font-bold text-xs uppercase tracking-[0.2em] mb-4">Class Features &amp; Feats</h3>
+<div class="space-y-3">
+<div class="obsidian-panel rounded-xl p-4 flex gap-4 items-start">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+</div>
+<div>
+<h5 class="font-bold text-slate-200 text-sm">Divine Sense</h5>
+<p class="text-xs text-slate-400 mt-1">As an action, you can detect celestial, fiend, or undead creatures within 60 feet. Uses: 4/long rest.</p>
+</div>
+</div>
+<div class="obsidian-panel rounded-xl p-4 flex gap-4 items-start">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">healing</span>
+</div>
+<div>
+<h5 class="font-bold text-slate-200 text-sm">Lay on Hands</h5>
+<p class="text-xs text-slate-400 mt-1">Pool of healing power: 25 HP. As an action, you can touch a creature and restore hit points from this pool.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Decoration -->
+<footer class="mt-20 py-10 border-t border-slate-800/50 text-center">
+<p class="text-slate-600 text-xs font-medium tracking-widest uppercase">The Eternal Oath • Moonwhisper Chronicles</p>
+</footer>
+</body></html>
