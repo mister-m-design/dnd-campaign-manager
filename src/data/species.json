@@ -1,0 +1,36 @@
+[
+    {
+        "name": "Human",
+        "speed": 30,
+        "size": "Medium",
+        "traits": [
+            {
+                "name": "Ability Score Increase",
+                "description": "Your ability scores each increase by 1."
+            },
+            {
+                "name": "Languages",
+                "description": "You can speak, read, and write Common and one extra language of your choice."
+            }
+        ]
+    },
+    {
+        "name": "Elf",
+        "speed": 30,
+        "size": "Medium",
+        "traits": [
+            {
+                "name": "Darkvision",
+                "description": "Accustomed to twilit forests and the night sky, you have superior vision in dark and dim conditions."
+            },
+            {
+                "name": "Keen Senses",
+                "description": "You have proficiency in the Perception skill."
+            },
+            {
+                "name": "Fey Ancestry",
+                "description": "You have advantage on saving throws against being charmed, and magic can't put you to sleep."
+            }
+        ]
+    }
+]

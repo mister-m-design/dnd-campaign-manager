@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Sidebar from "@/components/Sidebar";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -8,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "D&D Campaign Manager",
+  title: "StitchDM | D&D Campaign Manager",
   description: "A comprehensive tool for D&D campaigns, characters, and adventures.",
 };
 
@@ -26,11 +27,13 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} font-display antialiased`}
+        className={`${inter.variable} font-display antialiased bg-background-dark text-foreground flex`}
       >
-        {children}
+        <Sidebar />
+        <div className="flex-grow min-h-screen overflow-y-auto">
+          {children}
+        </div>
       </body>
     </html>
   );
 }
-
