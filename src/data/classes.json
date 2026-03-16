@@ -1,48 +1,138 @@
 [
     {
+        "name": "Barbarian",
+        "hitDie": "d12",
+        "primaryAbility": [
+            "Strength"
+        ],
+        "skillCount": 2,
+        "savingThrows": [
+            "Strength",
+            "Constitution"
+        ]
+    },
+    {
+        "name": "Bard",
+        "hitDie": "d8",
+        "primaryAbility": [
+            "Charisma"
+        ],
+        "skillCount": 3,
+        "savingThrows": [
+            "Dexterity",
+            "Charisma"
+        ]
+    },
+    {
+        "name": "Cleric",
+        "hitDie": "d8",
+        "primaryAbility": [
+            "Wisdom"
+        ],
+        "skillCount": 2,
+        "savingThrows": [
+            "Wisdom",
+            "Charisma"
+        ]
+    },
+    {
+        "name": "Druid",
+        "hitDie": "d8",
+        "primaryAbility": [
+            "Wisdom"
+        ],
+        "skillCount": 2,
+        "savingThrows": [
+            "Intelligence",
+            "Wisdom"
+        ]
+    },
+    {
+        "name": "Fighter",
+        "hitDie": "d10",
+        "primaryAbility": [
+            "Strength",
+            "Dexterity"
+        ],
+        "skillCount": 2,
+        "savingThrows": [
+            "Strength",
+            "Constitution"
+        ]
+    },
+    {
+        "name": "Monk",
+        "hitDie": "d8",
+        "primaryAbility": [
+            "Dexterity",
+            "Wisdom"
+        ],
+        "skillCount": 2,
+        "savingThrows": [
+            "Strength",
+            "Dexterity"
+        ]
+    },
+    {
         "name": "Paladin",
         "hitDie": "d10",
         "primaryAbility": [
             "Strength",
             "Charisma"
         ],
+        "skillCount": 2,
         "savingThrows": [
             "Wisdom",
             "Charisma"
+        ]
+    },
+    {
+        "name": "Ranger",
+        "hitDie": "d10",
+        "primaryAbility": [
+            "Dexterity",
+            "Wisdom"
         ],
-        "proficiencies": {
-            "armor": [
-                "Light",
-                "Medium",
-                "Heavy",
-                "Shields"
-            ],
-            "weapons": [
-                "Simple",
-                "Martial"
-            ],
-            "tools": [],
-            "skills": [
-                "Choose two from Athletics, Insight, Intimidation, Medicine, Persuasion, and Religion"
-            ]
-        },
-        "startingEquipment": [
-            "a martial weapon and a shield or two martial weapons",
-            "five javelins or any simple melee weapon",
-            "a priest's pack or an explorer's pack",
-            "Chain mail and a holy symbol"
+        "skillCount": 3,
+        "savingThrows": [
+            "Strength",
+            "Dexterity"
+        ]
+    },
+    {
+        "name": "Rogue",
+        "hitDie": "d8",
+        "primaryAbility": [
+            "Dexterity"
         ],
-        "features": [
-            {
-                "level": 1,
-                "name": "Divine Sense",
-                "description": "The presence of strong evil registers on your senses like a noxious odor, and powerful good rings like heavenly music in your ears."
-            },
-            {
-                "level": 1,
-                "name": "Lay on Hands",
-                "description": "Your blessed touch can heal wounds. You have a pool of healing power that replenishes when you take a long rest."
-            }
+        "skillCount": 4,
+        "savingThrows": [
+            "Dexterity",
+            "Intelligence"
+        ]
+    },
+    {
+        "name": "Sorcerer",
+        "hitDie": "d6",
+        "primaryAbility": [
+            "Charisma"
+        ],
+        "skillCount": 2,
+        "savingThrows": [
+            "Constitution",
+            "Charisma"
+        ]
+    },
+    {
+        "name": "Warlock",
+        "hitDie": "d8",
+        "primaryAbility": [
+            "Charisma"
+        ],
+        "skillCount": 2,
+        "savingThrows": [
+            "Wisdom",
+            "Charisma"
         ]
     },
     {
@@ -51,36 +141,10 @@
         "primaryAbility": [
             "Intelligence"
         ],
+        "skillCount": 2,
         "savingThrows": [
             "Intelligence",
             "Wisdom"
-        ],
-        "proficiencies": {
-            "armor": [],
-            "weapons": [
-                "Daggers",
-                "Darts",
-                "Slings",
-                "Quarterstaffs",
-                "Light crossbows"
-            ],
-            "tools": [],
-            "skills": [
-                "Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion"
-            ]
-        },
-        "startingEquipment": [
-            "a quarterstaff or a dagger",
-            "a component pouch or an arcane focus",
-            "a scholar's pack or an explorer's pack",
-            "A spellbook"
-        ],
-        "features": [
-            {
-                "level": 1,
-                "name": "Arcane Recovery",
-                "description": "You have learned to regain some of your magical energy by studying your spellbook."
-            }
         ]
     }
 ]

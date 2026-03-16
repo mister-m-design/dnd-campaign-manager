@@ -1,0 +1,285 @@
+[
+    {
+        "id": "leather-armor",
+        "name": "Leather Armor",
+        "type": "Armor",
+        "ac": 11,
+        "base": "11 + DEX",
+        "weight": "10 lbs",
+        "description": "The breastplate and shoulder protectors of this armor are made of leather that has been stiffened."
+    },
+    {
+        "id": "studded-leather",
+        "name": "Studded Leather",
+        "type": "Armor",
+        "ac": 12,
+        "base": "12 + DEX",
+        "weight": "13 lbs",
+        "description": "Made from tough but flexible leather, studded leather is reinforced with close-set rivets or spikes."
+    },
+    {
+        "id": "chain-mail",
+        "name": "Chain Mail",
+        "type": "Armor",
+        "ac": 16,
+        "base": "16",
+        "weight": "55 lbs",
+        "description": "Made of interlocking metal rings, chain mail includes a layer of quilted fabric worn underneath."
+    },
+    {
+        "id": "scale-mail",
+        "name": "Scale Mail",
+        "type": "Armor",
+        "ac": 14,
+        "base": "14 + DEX (max 2)",
+        "weight": "45 lbs",
+        "description": "This armor consists of a coat and leggings of leather covered with overlapping pieces of metal."
+    },
+    {
+        "id": "plate-armor",
+        "name": "Plate Armor",
+        "type": "Armor",
+        "ac": 18,
+        "base": "18",
+        "weight": "65 lbs",
+        "description": "Plate armor consists of shaped, interlocking metal plates to cover the entire body."
+    },
+    {
+        "id": "dagger",
+        "name": "Dagger",
+        "type": "Weapon",
+        "damage": "1d4",
+        "property": "Finesse, Light, Thrown (20/60)",
+        "weight": "1 lb",
+        "description": "A versatile blade that can be concealed."
+    },
+    {
+        "id": "mace",
+        "name": "Mace",
+        "type": "Weapon",
+        "damage": "1d6",
+        "property": "Bludgeoning",
+        "weight": "4 lbs",
+        "description": "A heavy-headed club for crushing armor."
+    },
+    {
+        "id": "longsword",
+        "name": "Longsword",
+        "type": "Weapon",
+        "damage": "1d8",
+        "property": "Versatile (1d10)",
+        "weight": "3 lbs",
+        "description": "A classic blade favored by knights and adventurers."
+    },
+    {
+        "id": "shortbow",
+        "name": "Shortbow",
+        "type": "Weapon",
+        "damage": "1d6",
+        "property": "Ammunition, Range (80/320), Two-Handed",
+        "weight": "2 lbs",
+        "description": "A light wood bow that is easy to handle."
+    },
+    {
+        "id": "greataxe",
+        "name": "Greataxe",
+        "type": "Weapon",
+        "damage": "1d12",
+        "property": "Heavy, Two-Handed",
+        "weight": "7 lbs",
+        "description": "A massive axe capable of devastating blows."
+    },
+    {
+        "id": "rapier",
+        "name": "Rapier",
+        "type": "Weapon",
+        "damage": "1d8",
+        "property": "Finesse",
+        "weight": "2 lbs",
+        "description": "A slender blade designed for swift lunges."
+    },
+    {
+        "id": "warhammer",
+        "name": "Warhammer",
+        "type": "Weapon",
+        "damage": "1d8",
+        "property": "Versatile (1d10)",
+        "weight": "2 lbs",
+        "description": "A versatile hammer for crushing foes."
+    },
+    {
+        "id": "hand-crossbow",
+        "name": "Hand Crossbow",
+        "type": "Weapon",
+        "damage": "1d6",
+        "property": "Ammunition, Light, Range (30/120)",
+        "weight": "3 lbs",
+        "description": "A small, one-handed crossbow."
+    },
+    {
+        "id": "shield",
+        "name": "Shield",
+        "type": "Gear",
+        "ac": 2,
+        "weight": "6 lbs",
+        "description": "A shield increases your Armor Class by 2."
+    },
+    {
+        "id": "potion-healing",
+        "name": "Potion of Healing",
+        "type": "Consumable",
+        "damage": "2d4+2",
+        "property": "Healing",
+        "description": "Regains 2d4 + 2 hit points."
+    },
+    {
+        "id": "holy-symbol",
+        "name": "Holy Symbol",
+        "type": "Gear",
+        "description": "A representation of a god or pantheon used for divine spells."
+    },
+    {
+        "id": "thieves-tools",
+        "name": "Thieves' Tools",
+        "type": "Tools",
+        "description": "Used for picking locks and disarming traps."
+    },
+    {
+        "id": "spellbook",
+        "name": "Spellbook",
+        "type": "Gear",
+        "description": "Essential for wizards for recording spells."
+    },
+    {
+        "id": "backpack",
+        "name": "Backpack",
+        "type": "Gear",
+        "description": "A leather pack for holding your gear."
+    },
+    {
+        "id": "explorers-pack",
+        "name": "Explorer's Pack",
+        "type": "Gear",
+        "description": "Includes backpack, bedroll, mess kit, tinderbox, 10 torches, 10 days of rations, waterskin, and 50 feet of rope."
+    },
+    {
+        "id": "burglars-pack",
+        "name": "Burglar's Pack",
+        "type": "Gear",
+        "description": "Includes backpack, 1000 ball bearings, 10ft string, bell, 5 candles, crowbar, hammer, 10 pitons, hooded lantern, 2 days rations, and tinderbox."
+    },
+    {
+        "id": "crowbar",
+        "name": "Crowbar",
+        "type": "Gear",
+        "description": "Using a crowbar grants advantage on Strength checks where its leverage can be applied."
+    },
+    {
+        "id": "grappling-hook",
+        "name": "Grappling Hook",
+        "type": "Gear",
+        "description": "A metal hook for climbing."
+    },
+    {
+        "id": "lantern-hooded",
+        "name": "Hooded Lantern",
+        "type": "Gear",
+        "description": "Casts bright light in a 30-foot radius and dim light for an additional 30 feet."
+    },
+    {
+        "id": "rope-hempen",
+        "name": "Hempen Rope (50ft)",
+        "type": "Gear",
+        "description": "A standard 50-foot length of hempen rope."
+    },
+    {
+        "id": "tinderbox",
+        "name": "Tinderbox",
+        "type": "Gear",
+        "description": "Contains flint, fire steel, and tinder."
+    },
+    {
+        "id": "mess-kit",
+        "name": "Mess Kit",
+        "type": "Gear",
+        "description": "A set of eating utensils and plates."
+    },
+    {
+        "id": "alchemists-supplies",
+        "name": "Alchemist's Supplies",
+        "type": "Tools",
+        "description": "Used for creating alchemical substances."
+    },
+    {
+        "id": "smiths-tools",
+        "name": "Smith's Tools",
+        "type": "Tools",
+        "description": "Used for crafting and repairing metal items."
+    },
+    {
+        "id": "tinkers-tools",
+        "name": "Tinker's Tools",
+        "type": "Tools",
+        "description": "Used for repairing mundane metal items."
+    },
+    {
+        "id": "arcane-focus-crystal",
+        "name": "Arcane Focus: Crystal",
+        "type": "Focus",
+        "description": "A crystal used as a spellcasting focus for arcane spells."
+    },
+    {
+        "id": "arcane-focus-orb",
+        "name": "Arcane Focus: Orb",
+        "type": "Focus",
+        "description": "An orb used as a spellcasting focus for arcane spells."
+    },
+    {
+        "id": "arcane-focus-rod",
+        "name": "Arcane Focus: Rod",
+        "type": "Focus",
+        "description": "A rod used as a spellcasting focus for arcane spells."
+    },
+    {
+        "id": "arcane-focus-staff",
+        "name": "Arcane Focus: Staff",
+        "type": "Focus",
+        "description": "A staff used as a spellcasting focus for arcane spells."
+    },
+    {
+        "id": "arcane-focus-wand",
+        "name": "Arcane Focus: Wand",
+        "type": "Focus",
+        "description": "A wand used as a spellcasting focus for arcane spells."
+    },
+    {
+        "id": "druidic-focus-mistletoe",
+        "name": "Druidic Focus: Mistletoe",
+        "type": "Focus",
+        "description": "A sprig of mistletoe used as a druidic spellcasting focus."
+    },
+    {
+        "id": "druidic-focus-totem",
+        "name": "Druidic Focus: Totem",
+        "type": "Focus",
+        "description": "An object like a carved piece of wood used as a druidic spellcasting focus."
+    },
+    {
+        "id": "druidic-focus-staff",
+        "name": "Druidic Focus: Wooden Staff",
+        "type": "Focus",
+        "description": "A wooden staff used as a druidic spellcasting focus."
+    },
+    {
+        "id": "druidic-focus-wand",
+        "name": "Druidic Focus: Yew Wand",
+        "type": "Focus",
+        "description": "A yew wand used as a druidic spellcasting focus."
+    },
+    {
+        "id": "component-pouch",
+        "name": "Component Pouch",
+        "type": "Focus",
+        "description": "A small, airtight leather pouch that contains all the material components you need to cast your spells, except those with a specific gold cost."
+    }
+]

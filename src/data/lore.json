@@ -1,0 +1,55 @@
+{
+    "classes": {
+        "Barbarian": "A fierce warrior of primitive background who can enter a battle rage.",
+        "Bard": "An inspiring magician whose power echoes the music of creation.",
+        "Cleric": "A priestly champion who wields divine magic in service of a higher power.",
+        "Druid": "A priest of the Old Faith, wielding the powers of nature and adopting animal forms.",
+        "Fighter": "A master of martial combat, skilled with a variety of weapons and armor.",
+        "Monk": "A master of martial arts, harnessing the power of the body in pursuit of physical and spiritual perfection.",
+        "Paladin": "A holy warrior bound to a sacred oath.",
+        "Ranger": "A warrior who uses martial prowess and nature magic to combat threats on the edges of civilization.",
+        "Rogue": "A scoundrel who uses stealth and trickery to overcome obstacles and enemies.",
+        "Sorcerer": "A spellcaster who draws on inborn magic from a gift or bloodline.",
+        "Warlock": "A wielder of magic that is derived from a bargain with an extraplanar entity.",
+        "Wizard": "A scholarly magic-user capable of wielding cosom-altering powers."
+    },
+    "alignments": {
+        "Lawful Good": "Typically acts as a good person should be expected to act. They combine a commitment to opposing evil with the discipline to fight relentlessly.",
+        "Neutral Good": "Do the best that a good person can do. They are devoted to helping others and work with kings and magistrates but do not feel beholden to them.",
+        "Chaotic Good": "Act as their conscience directs, with little regard for what others expect. They make their own way, but they're kind and benevolent.",
+        "Lawful Neutral": "Act in accordance with law, tradition, or personal codes. Order and organization are paramount to them.",
+        "True Neutral": "The character who prefers to steer clear of moral questions and don't take sides, doing what seems appropriate at the time.",
+        "Chaotic Neutral": "Follow their whims, holding their personal freedom above all else. They are individualists first and last.",
+        "Lawful Evil": "Methodically take what they want, within the limits of a code of tradition, loyalty, or order.",
+        "Neutral Evil": "The alignment of those who do whatever they can get away with, without compassion or qualms.",
+        "Chaotic Evil": "Act with arbitrary violence, spurred by their greed, hatred, or bloodlust. Their only desire is for personal gain."
+    },
+    "stats": {
+        "STR": "Strength measures physical power and athletic training. It's used for physical force, lifting, and melee attacks.",
+        "DEX": "Dexterity measures agility, reflexes, and balance. It affects Armor Class and ranged attacks.",
+        "CON": "Constitution measures health, stamina, and vital force. It determines your Hit Points.",
+        "INT": "Intelligence measures mental acuity, information recall, and analytical skill. Crucial for wizards.",
+        "WIS": "Wisdom measures awareness, intuition, and insight. Important for clerics and druids.",
+        "CHA": "Charisma measures your ability to interact effectively with others and social influence."
+    },
+    "skills": {
+        "Athletics": "Covers difficult situations you encounter while climbing, jumping, or swimming.",
+        "Acrobatics": "Your ability to stay on your feet in a tricky situation, like walking across ice or balancing on a tightrope.",
+        "Sleight of Hand": "Manual trickery, such as planting something on someone or concealing an object on your person.",
+        "Stealth": "Escaping notice by moving quietly and hiding from others.",
+        "Arcana": "Your ability to recall lore about spells, magic items, eldritch symbols, and the planes of existence.",
+        "History": "Your ability to recall lore about historical events, legendary people, ancient kingdoms, and former cultures.",
+        "Investigation": "Looking for clues and making deductions based on those clues.",
+        "Nature": "Your ability to recall lore about terrain, plants and animals, the weather, and natural cycles.",
+        "Religion": "Your ability to recall lore about deities, rites and prayers, religious hierarchies, and holy symbols.",
+        "Animal Handling": "Calming down a domesticated animal, keeping a mount from getting spooked, or intuiting an animal’s intentions.",
+        "Insight": "Determining the true intentions of a creature, such as searching out a lie or predicting someone’s next move.",
+        "Medicine": "Stabilizing a dying companion or diagnosing an illness.",
+        "Perception": "Your general awareness of your surroundings and the keenness of your senses.",
+        "Survival": "Following tracks, hunting wild game, guiding your group through frozen wastelands, and noticing signs that owlbears live nearby.",
+        "Deception": "Hiding the truth, either verbally or through your actions.",
+        "Intimidation": "When you attempt to influence someone through overt threats, hostile actions, or physical violence.",
+        "Performance": "Delighting an audience with music, dance, acting, storytelling, or some other form of entertainment.",
+        "Persuasion": "Influencing someone with tact, social graces, or good nature."
+    }
+}

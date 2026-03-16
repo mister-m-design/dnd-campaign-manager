@@ -5,14 +5,15 @@
   /* Deep Obsidian Blue */
   --foreground: #f1f5f9;
   /* Slate 100 */
-  --primary: #fbbf24;
-  /* Warm Amber Gold */
-  --primary-glow: rgba(251, 191, 36, 0.4);
+  --primary: #d9a74a;
+  /* Muted Soft Gold/Amber */
+  --primary-glow: rgba(217, 167, 74, 0.3);
   --obsidian-panel: rgba(25, 30, 45, 0.6);
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-dark: #050608;
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-obsidian: var(--obsidian-panel);
@@ -37,4 +38,23 @@ body {
 
 .primary-glow {
   box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.shimmer {
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }

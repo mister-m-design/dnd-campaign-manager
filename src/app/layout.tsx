@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "StitchDM | D&D Campaign Manager",
+  title: "MythicTable | D&D Campaign Manager",
   description: "A comprehensive tool for D&D campaigns, characters, and adventures.",
 };
 

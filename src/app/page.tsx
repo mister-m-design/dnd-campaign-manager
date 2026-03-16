@@ -11,12 +11,12 @@ export default function Home() {
       </div>
 
       <div className="text-center space-y-2">
-        <h1 className="text-5xl font-black text-slate-100 uppercase tracking-tighter">Welcome to StitchDM</h1>
+        <h1 className="text-5xl font-black text-slate-100 uppercase tracking-tighter">Welcome to MythicTable</h1>
         <p className="text-slate-500 font-medium tracking-widest uppercase text-xs">The Ultimate Campaign Orchestrator</p>
       </div>
 
       <div className="flex gap-4">
-        <Link href="/campaign" className="bg-primary text-background-dark px-8 py-3 rounded-xl font-black uppercase text-xs tracking-[0.2em] hover:scale-105 active:scale-95 transition-all primary-glow">
+        <Link href="/campaign" className="bg-primary text-black px-10 py-4 rounded-xl font-black uppercase text-[11px] tracking-[0.2em] hover:scale-105 active:scale-95 transition-all primary-glow border-t border-white/20">
           Resume Campaign
         </Link>
         <Link href="/characters/create" className="bg-white/5 border border-white/10 text-slate-300 px-8 py-3 rounded-xl font-black uppercase text-xs tracking-[0.2em] hover:bg-white/10 transition-all">
