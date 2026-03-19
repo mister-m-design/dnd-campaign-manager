@@ -5,7 +5,8 @@
 
 export interface RollResult {
     notation: string;
-    rolls: number[];
+    rolls: number[];         // the kept dice
+    droppedRolls?: number[]; // the dropped dice (advantage/disadvantage only)
     modifier: number;
     total: number;
     type: 'normal' | 'advantage' | 'disadvantage';
@@ -67,13 +68,17 @@ export class DiceEngine {
                 const firstTotal = firstRolls.reduce((a, b) => a + b, 0);
                 const secondTotal = secondRolls.reduce((a, b) => a + b, 0);
 
-                const finalRolls = type === 'advantage'
-                    ? (firstTotal >= secondTotal ? firstRolls : secondRolls)
-                    : (firstTotal <= secondTotal ? firstRolls : secondRolls);
+                const keepFirst = type === 'advantage'
+                    ? firstTotal >= secondTotal
+                    : firstTotal <= secondTotal;
+
+                const finalRolls = keepFirst ? firstRolls : secondRolls;
+                const droppedRolls = keepFirst ? secondRolls : firstRolls;
 
                 return {
                     notation,
                     rolls: finalRolls,
+                    droppedRolls,
                     modifier,
                     total: finalRolls.reduce((a, b) => a + b, 0) + modifier,
                     type
