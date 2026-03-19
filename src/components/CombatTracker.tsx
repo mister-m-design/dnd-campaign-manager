@@ -73,7 +73,6 @@ export default function CombatTracker() {
     const [manualResult, setManualResult] = useState<string>('');
     const [combatRollResult, setCombatRollResult] = useState<RollResult | null>(null);
     const [combatAdvMode, setCombatAdvMode] = useState<'normal' | 'advantage' | 'disadvantage'>('normal');
-    const [showDiceRoller, setShowDiceRoller] = useState(false);
     const [showResetConfirm, setShowResetConfirm] = useState(false);
     const logEndRef = useRef<HTMLDivElement>(null);
     const searchParams = useSearchParams();
@@ -392,15 +391,6 @@ export default function CombatTracker() {
                     <button onClick={handleSaveEncounter} className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-emerald-500/20 transition-all">Save State</button>
                     <button onClick={() => setIsSetupOpen(true)} className="bg-white/5 border border-white/10 text-slate-300 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all">Add Combatants</button>
                     <button onClick={resetEncounter} className="border border-red-500/30 text-red-500 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-red-500/10 transition-all">Reset</button>
-                    <button
-                        onClick={() => setShowDiceRoller(v => !v)}
-                        className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border ${showDiceRoller ? 'bg-primary/20 border-primary/30 text-primary' : 'bg-white/5 border-white/10 text-slate-400 hover:bg-white/10'}`}
-                        title="Open standalone dice roller"
-                    >
-                        <span className="material-symbols-outlined text-sm">casino</span>
-                        Dice
-                    </button>
-
                     {/* Reset Confirmation Modal */}
                     <AnimatePresence>
                         {showResetConfirm && (
@@ -821,38 +811,8 @@ export default function CombatTracker() {
                 </div>
             </div>
 
-            {/* Standalone dice roller panel — hidden by default, opened via header Dice button */}
-            <AnimatePresence>
-                {showDiceRoller && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 flex items-end justify-end p-8"
-                        onClick={() => setShowDiceRoller(false)}
-                    >
-                        <motion.div
-                            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                            transition={{ type: 'spring', damping: 26, stiffness: 340 }}
-                            className="obsidian-panel rounded-3xl p-6 border border-white/10 w-80 shadow-2xl"
-                            onClick={e => e.stopPropagation()}
-                        >
-                            <div className="flex justify-between items-center mb-4">
-                                <h3 className="text-[10px] font-black text-slate-300 uppercase tracking-widest flex items-center gap-2">
-                                    <span className="material-symbols-outlined text-primary text-sm">casino</span>
-                                    Dice Roller
-                                </h3>
-                                <button onClick={() => setShowDiceRoller(false)} className="text-slate-600 hover:text-slate-400 transition-colors">
-                                    <span className="material-symbols-outlined text-sm">close</span>
-                                </button>
-                            </div>
-                            <DiceWidget embedded showHistory />
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {/* Standalone floating dice roller — always accessible, closed by default */}
+            <DiceWidget showHistory />
 
             {/* Setup Modal Placeholder */}
             <AnimatePresence>
