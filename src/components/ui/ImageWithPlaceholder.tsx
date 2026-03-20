@@ -10,7 +10,7 @@ interface ImageWithPlaceholderProps extends Omit<ImageProps, 'src' | 'onLoad'> {
     containerClassName?: string;
 }
 
-const getDeterministicColor = (seed: string) => {
+const getDeterministicColor = (seed: string = '') => {
     const colors = [
         'from-slate-700 to-slate-900',
         'from-blue-700 to-blue-900',
@@ -21,8 +21,9 @@ const getDeterministicColor = (seed: string) => {
         'from-cyan-700 to-cyan-900',
     ];
     let hash = 0;
-    for (let i = 0; i < seed.length; i++) {
-        hash = seed.charCodeAt(i) + ((hash << 5) - hash);
+    const s = seed || '';
+    for (let i = 0; i < s.length; i++) {
+        hash = s.charCodeAt(i) + ((hash << 5) - hash);
     }
     return colors[Math.abs(hash) % colors.length];
 };
@@ -39,9 +40,13 @@ export const ImageWithPlaceholder = ({
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
 
-    const initials = name
-        ? name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
-        : alt.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+    const initials = (name || alt || '')
+        .split(' ')
+        .filter(n => n.length > 0)
+        .map(n => n[0])
+        .join('')
+        .toUpperCase()
+        .slice(0, 2);
 
     if (!src || hasError) {
         return (
@@ -61,7 +66,9 @@ export const ImageWithPlaceholder = ({
             <Image
                 src={src}
                 alt={alt}
-                className={`${className} transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                fill
+                unoptimized
+                className={`${className} transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'} object-cover`}
                 onLoad={() => setIsLoading(false)}
                 onError={() => {
                     setHasError(true);

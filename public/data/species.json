@@ -1,0 +1,160 @@
+[
+    {
+        "name": "Aasimar",
+        "speed": 30,
+        "size": "Medium",
+        "features": [
+            { "name": "Celestial Resistance", "description": "Resistance to Necrotic and Radiant damage." },
+            { "name": "Darkvision", "description": "60 feet." },
+            { "name": "Healing Hands", "description": "Magic action to heal a creature you touch by d4 per Proficiency Bonus." },
+            { "name": "Celestial Revelation", "description": "At level 3, transform for 1 minute (Wings, Shroud, or Radiance)." }
+        ]
+    },
+    {
+        "name": "Dragonborn",
+        "speed": 30,
+        "size": "Medium",
+        "features": [
+            { "name": "Breath Weapon", "description": "Replace one attack with a 15ft cone or 30ft line of energy." },
+            { "name": "Draconic Resistance", "description": "Resistance to the damage type associated with your ancestry." },
+            { "name": "Darkvision", "description": "60 feet." },
+            { "name": "Draconic Flight", "description": "At level 5, gain 10 min of flying speed once per long rest." }
+        ]
+    },
+    {
+        "name": "Dwarf",
+        "speed": 30,
+        "size": "Medium",
+        "features": [
+            { "name": "Darkvision", "description": "120 feet." },
+            { "name": "Dwarven Resilience", "description": "Advantage on saves against Poison and resistance to Poison damage." },
+            { "name": "Dwarven Toughness", "description": "HP increases by 1 each level." },
+            { "name": "Stonecunning", "description": "Bonus action to gain Tremorsense (60ft) on stone surfaces for 10 min." }
+        ]
+    },
+    {
+        "name": "Elf",
+        "speed": 30,
+        "size": "Medium",
+        "features": [
+            { "name": "Darkvision", "description": "60 feet." },
+            { "name": "Elven Lineage", "description": "Choose Drow (Spells, Darkvision 120ft), Wood Elf (Speed 35ft, Spells), or High Elf (Spells)." },
+            { "name": "Fey Ancestry", "description": "Advantage on saves to avoid or end the Charmed condition." },
+            { "name": "Keen Senses", "description": "Proficiency in Perception." },
+            { "name": "Trance", "description": "4-hour long rests, remain conscious." }
+        ]
+    },
+    {
+        "name": "Firbolg",
+        "speed": 30,
+        "size": "Medium",
+        "features": [
+            { "name": "Firbolg Magic", "description": "You can cast Detect Magic and Disguise Self once per long rest." },
+            { "name": "Hidden Step", "description": "Bonus action to turn invisible until start of next turn or you attack/damage." },
+            { "name": "Powerful Build", "description": "Count as one size larger for carrying capacity." },
+            { "name": "Speech of Beast and Leaf", "description": "Can communicate in a limited manner with beasts and plants." }
+        ]
+    },
+    {
+        "name": "Gnome",
+        "speed": 30,
+        "size": "Small",
+        "features": [
+            { "name": "Darkvision", "description": "60 feet." },
+            { "name": "Gnomish Cunning", "description": "Advantage on INT, WIS, and CHA saves." },
+            { "name": "Gnomish Lineage", "description": "Choose Forest Gnome (Minor Illusion) or Rock Gnome (Prestidigitation/Tinkering)." }
+        ]
+    },
+    {
+        "name": "Goliath",
+        "speed": 35,
+        "size": "Medium",
+        "features": [
+            { "name": "Large Form", "description": "At level 5, bonus action to become Large for 10 min (Adv on STR saves, +1d6 damage)." },
+            { "name": "Powerful Build", "description": "Advantage on saves to end Grappled/Restrained. Double carrying capacity." },
+            { "name": "Giant Ancestry", "description": "Choose Cloud, Fire, Frost, Hill, Stone, or Storm for specific unique reactions." }
+        ]
+    },
+    {
+        "name": "Halfling",
+        "speed": 30,
+        "size": "Small",
+        "features": [
+            { "name": "Brave", "description": "Advantage on saves to avoid or end the Frightened condition." },
+            { "name": "Halfling Nimbleness", "description": "Move through the space of any creature larger than you." },
+            { "name": "Luck", "description": "Reroll a natural 1 on d20 tests." },
+            { "name": "Naturally Stealthy", "description": "Hide behind creatures at least one size larger than you." }
+        ]
+    },
+    {
+        "name": "Human",
+        "speed": 30,
+        "size": "Medium",
+        "features": [
+            { "name": "Resourceful", "description": "Gain Inspiration whenever you finish a Long Rest." },
+            { "name": "Skill Versatility", "description": "Gain proficiency in one skill of your choice." },
+            { "name": "Versatile Feat", "description": "Gain one Origin Feat of your choice." }
+        ]
+    },
+    {
+        "name": "Kenku",
+        "speed": 30,
+        "size": "Medium",
+        "features": [
+            { "name": "Expert Duplication", "description": "Advantage on checks to produce copies of objects or documents." },
+            { "name": "Kenku Recall", "description": "Give yourself advantage on a skill check you are proficient in (PB times/long rest)." },
+            { "name": "Mimicry", "description": "Can mimic sounds you have heard, including voices." }
+        ]
+    },
+    {
+        "name": "Kobold",
+        "speed": 30,
+        "size": "Small",
+        "features": [
+            { "name": "Darkvision", "description": "60 feet." },
+            { "name": "Kobold Legacy", "description": "Choose Craftiness (Skill), Defiance (Fear Resistance), or Draconic Sorcery (Cantrip)." },
+            { "name": "Draconic Cry", "description": "Bonus action to give yourself and allies advantage on attacks against enemies within 10ft." }
+        ]
+    },
+    {
+        "name": "Lizardfolk",
+        "speed": 30,
+        "size": "Medium",
+        "features": [
+            { "name": "Natural Armor", "description": "AC is 13 + DEX modifier if wearing no armor." },
+            { "name": "Hungry Jaws", "description": "Bonus action bite attack that gives temporary hit points." },
+            { "name": "Nature's Intuition", "description": "Gain proficiency in two nature-related skills." },
+            { "name": "Hold Breath", "description": "Can hold breath for up to 15 minutes." }
+        ]
+    },
+    {
+        "name": "Orc",
+        "speed": 30,
+        "size": "Medium",
+        "features": [
+            { "name": "Adrenaline Rush", "description": "Bonus action to Dash and gain Temporary HP (PB amount)." },
+            { "name": "Darkvision", "description": "120 feet." },
+            { "name": "Relentless Endurance", "description": "Once per long rest, when reduced to 0 HP, drop to 1 HP instead." }
+        ]
+    },
+    {
+        "name": "Tabaxi",
+        "speed": 30,
+        "size": "Medium",
+        "features": [
+            { "name": "Cat's Claws", "description": "Climbing speed of 30ft and unarmed strikes deal 1d6 + STR slashing damage." },
+            { "name": "Cat's Talent", "description": "Proficiency in Perception and Stealth." },
+            { "name": "Feline Agility", "description": "Double your speed for one turn during combat." }
+        ]
+    },
+    {
+        "name": "Tiefling",
+        "speed": 30,
+        "size": "Medium",
+        "features": [
+            { "name": "Darkvision", "description": "60 feet." },
+            { "name": "Otherworldly Lineage", "description": "Choose Abyssal (Poison/Vitriol), Chthonic (Necrotic/Wither), or Infernal (Fire/Hell)." },
+            { "name": "Thaumaturgy", "description": "You know the Thaumaturgy cantrip." }
+        ]
+    }
+]

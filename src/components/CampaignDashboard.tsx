@@ -1,11 +1,244 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePersistentState } from '@/hooks/usePersistentState';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ConfirmModal } from '@/components/ui/ConfirmModal';
+import { useSyncedState } from '@/hooks/useSyncedState';
+import { useAutoBackup } from '@/hooks/useAutoBackup';
+import { exportBackup, importBackup, restoreAutoBackup } from '@/lib/autoBackup';
+import { generateSafeId } from '@/lib/utils';
+import { useBattleState } from '@/hooks/useBattleState';
+import type { CombatantState } from '@/types';
+import WorldMap from '@/components/WorldMap';
+
+// ─── PARTY STATUS WIDGET ──────────────────────────────────────────────────────
+
+function PartyStatusWidget() {
+  const [combatants, setCombatants] = useState<CombatantState[]>([]);
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('mythic_v1_combatants');
+      if (raw) setCombatants(JSON.parse(raw));
+    } catch {}
+  }, []);
+
+  const allies = combatants.filter(c => c.side === 'Ally' && c.inCombat);
+  if (allies.length === 0) return null;
+
+  return (
+    <section className="obsidian-panel rounded-3xl p-6 border border-white/5">
+      <h3 className="text-slate-100 font-black text-xs uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+        <span className="material-symbols-outlined text-primary text-sm">favorite</span>
+        Party Status (Active Combat)
+      </h3>
+      <div className="space-y-2.5">
+        {allies.map(c => {
+          const pct = c.maxHP > 0 ? Math.round((c.currentHP / c.maxHP) * 100) : 0;
+          const bar = pct > 60 ? 'bg-green-500' : pct > 25 ? 'bg-amber-500' : 'bg-red-500';
+          return (
+            <div key={c.instanceId} className="space-y-1">
+              <div className="flex items-center justify-between text-[10px]">
+                <span className="font-black text-slate-200 uppercase tracking-tight">{c.name}</span>
+                <span className={`font-bold ${pct <= 0 ? 'text-red-400' : 'text-slate-400'}`}>
+                  {c.currentHP <= 0 ? 'DOWN' : `${c.currentHP} / ${c.maxHP} HP`}
+                </span>
+              </div>
+              <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                <div className={`h-full rounded-full transition-all ${bar}`} style={{ width: `${Math.max(0, pct)}%` }} />
+              </div>
+              {c.conditions.length > 0 && (
+                <div className="flex flex-wrap gap-1">
+                  {c.conditions.map(cond => (
+                    <span key={cond} className="text-[7px] bg-purple-900/30 text-purple-300 border border-purple-700/30 px-1.5 py-0.5 rounded font-bold uppercase">{cond}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+// ─── RECENT ENCOUNTERS WIDGET ─────────────────────────────────────────────────
+
+function RecentEncountersWidget() {
+  const { snapshots } = useBattleState();
+  const recent = snapshots.slice(0, 5);
+
+  if (recent.length === 0) return null;
+
+  return (
+    <section className="obsidian-panel rounded-3xl p-6 border border-white/5">
+      <h3 className="text-slate-100 font-black text-xs uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+        <span className="material-symbols-outlined text-primary text-sm">history</span>
+        Recent Encounters
+      </h3>
+      <div className="space-y-2">
+        {recent.map(snap => {
+          const allies = snap.combatants.filter(c => c.side === 'Ally').length;
+          const enemies = snap.combatants.filter(c => c.side === 'Enemy').length;
+          const downed = snap.combatants.filter(c => c.currentHP <= 0).length;
+          const dateStr = new Date(snap.updatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+          return (
+            <Link
+              key={snap.id}
+              href="/combat"
+              className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-primary/5 hover:border-primary/20 transition-all group"
+            >
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <p className="text-[10px] font-black text-slate-200 uppercase truncate group-hover:text-white">{snap.name}</p>
+                  {snap.isPrepMode && <span className="text-[7px] bg-blue-900/40 text-blue-300 border border-blue-700/30 px-1 py-0.5 rounded font-bold">PREP</span>}
+                </div>
+                <div className="text-[8px] text-slate-500 mt-0.5 flex items-center gap-2">
+                  <span>{allies}v{enemies}</span>
+                  {downed > 0 && <span className="text-red-400">{downed} downed</span>}
+                  {snap.location && <span className="text-slate-600">· {snap.location}</span>}
+                </div>
+              </div>
+              <span className="text-[8px] text-slate-600 ml-2 shrink-0">{dateStr}</span>
+            </Link>
+          );
+        })}
+      </div>
+      <Link href="/combat" className="block text-center text-[8px] font-black text-primary/70 hover:text-primary uppercase tracking-widest mt-3 transition-colors">
+        Open Combat Tracker →
+      </Link>
+    </section>
+  );
+}
+
+// ─── LOCATION TRACKER WIDGET ──────────────────────────────────────────────────
+
+interface LocationEntry {
+  id: string;
+  name: string;
+  type: 'City' | 'Dungeon' | 'Wilderness' | 'POI' | 'Region';
+  visited: boolean;
+  notes?: string;
+  current?: boolean;
+}
+
+function LocationTrackerWidget({ campaignId }: { campaignId: string }) {
+  const [locations, setLocations] = usePersistentState<LocationEntry[]>(`mythic_locations_${campaignId}`, []);
+  const [adding, setAdding] = useState(false);
+  const [newName, setNewName] = useState('');
+  const [newType, setNewType] = useState<LocationEntry['type']>('City');
+
+  const addLocation = () => {
+    if (!newName.trim()) return;
+    const entry: LocationEntry = {
+      id: generateSafeId(),
+      name: newName.trim(),
+      type: newType,
+      visited: false,
+      current: false,
+    };
+    setLocations(prev => [...prev, entry]);
+    setNewName('');
+    setAdding(false);
+  };
+
+  const toggleVisited = (id: string) => {
+    setLocations(prev => prev.map(l => l.id === id ? { ...l, visited: !l.visited } : l));
+  };
+
+  const setCurrentLocation = (id: string) => {
+    setLocations(prev => prev.map(l => ({ ...l, current: l.id === id ? !l.current : false })));
+  };
+
+  const deleteLocation = (id: string) => {
+    setLocations(prev => prev.filter(l => l.id !== id));
+  };
+
+  const typeIcon: Record<LocationEntry['type'], string> = {
+    City: 'location_city', Dungeon: 'castle', Wilderness: 'forest',
+    POI: 'place', Region: 'map',
+  };
+
+  return (
+    <section className="obsidian-panel rounded-3xl p-6 border border-white/5">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-slate-100 font-black text-xs uppercase tracking-[0.2em] flex items-center gap-2">
+          <span className="material-symbols-outlined text-primary text-sm">map</span>
+          Locations
+        </h3>
+        <button onClick={() => setAdding(v => !v)}
+          className="text-[8px] font-black text-primary/70 hover:text-primary uppercase tracking-widest border border-primary/20 px-3 py-1 rounded-xl hover:border-primary/40 transition-all">
+          {adding ? 'Cancel' : '+ Add'}
+        </button>
+      </div>
+
+      <AnimatePresence>
+        {adding && (
+          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden mb-3">
+            <div className="space-y-2 pb-3 border-b border-white/5">
+              <input
+                value={newName}
+                onChange={e => setNewName(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && addLocation()}
+                placeholder="Location name…"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-slate-100 placeholder-slate-700 focus:outline-none focus:border-primary/40"
+              />
+              <div className="flex gap-2">
+                {(['City','Dungeon','Wilderness','POI','Region'] as const).map(t => (
+                  <button key={t} onClick={() => setNewType(t)}
+                    className={`text-[8px] font-black px-2 py-1 rounded-lg border transition-colors uppercase ${newType === t ? 'bg-primary/15 border-primary/40 text-primary' : 'bg-white/5 border-white/10 text-slate-500 hover:text-slate-300'}`}>
+                    {t}
+                  </button>
+                ))}
+              </div>
+              <button onClick={addLocation} className="w-full py-1.5 rounded-xl bg-primary/15 border border-primary/30 text-primary text-[9px] font-black uppercase tracking-widest hover:bg-primary/25 transition-all">
+                Add Location
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {locations.length === 0 ? (
+        <p className="text-[9px] text-slate-600 italic text-center py-4">No locations tracked yet</p>
+      ) : (
+        <div className="space-y-1.5">
+          {locations.map(loc => (
+            <div key={loc.id} className={`flex items-center gap-2 p-2.5 rounded-xl border transition-all group ${loc.current ? 'bg-primary/5 border-primary/20' : 'bg-white/5 border-white/5 hover:border-white/10'}`}>
+              <button onClick={() => setCurrentLocation(loc.id)} title="Set as current location"
+                className="shrink-0">
+                <span className={`material-symbols-outlined text-sm ${loc.current ? 'text-primary' : 'text-slate-600 group-hover:text-slate-400'}`}>
+                  {typeIcon[loc.type]}
+                </span>
+              </button>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <span className={`text-[10px] font-black uppercase truncate ${loc.current ? 'text-primary' : loc.visited ? 'text-slate-400 line-through' : 'text-slate-200'}`}>
+                    {loc.name}
+                  </span>
+                  {loc.current && <span className="text-[7px] bg-primary/15 text-primary border border-primary/30 px-1 py-0.5 rounded font-bold uppercase">Here</span>}
+                </div>
+                <span className="text-[7px] text-slate-600 uppercase tracking-widest">{loc.type}</span>
+              </div>
+              <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button onClick={() => toggleVisited(loc.id)} title={loc.visited ? 'Mark unvisited' : 'Mark visited'}
+                  className={`p-1 rounded transition-colors ${loc.visited ? 'text-green-400' : 'text-slate-600 hover:text-slate-300'}`}>
+                  <span className="material-symbols-outlined text-xs">{loc.visited ? 'check_circle' : 'radio_button_unchecked'}</span>
+                </button>
+                <button onClick={() => deleteLocation(loc.id)} className="p-1 text-slate-700 hover:text-red-400 transition-colors">
+                  <span className="material-symbols-outlined text-xs">delete</span>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
 
 interface CampaignLog {
     id: string;
@@ -26,9 +259,182 @@ interface Campaign {
     logs: CampaignLog[];
 }
 
+// ─── CAMPAIGN MAPS WIDGET ─────────────────────────────────────────────────────
+
+interface CampaignMapEntry {
+  id: string;
+  name: string;
+  createdAt: string;
+}
+
+function CampaignMapsWidget({ campaignId }: { campaignId: string }) {
+  const [maps, setMaps] = usePersistentState<CampaignMapEntry[]>(`mythic_campaign_maps_${campaignId}`, []);
+  const [activeMapId, setActiveMapId] = usePersistentState<string | null>(`mythic_campaign_active_map_${campaignId}`, null);
+  const [isAdding, setIsAdding] = useState(false);
+  const [newMapName, setNewMapName] = useState('');
+  const [collapsed, setCollapsed] = useState(false);
+
+  // Ensure an active map is selected
+  React.useEffect(() => {
+    if (maps.length > 0 && (!activeMapId || !maps.find(m => m.id === activeMapId))) {
+      setActiveMapId(maps[0].id);
+    }
+  }, [maps, activeMapId, setActiveMapId]);
+
+  const addMap = () => {
+    if (!newMapName.trim()) return;
+    const newMap: CampaignMapEntry = {
+      id: generateSafeId(),
+      name: newMapName.trim(),
+      createdAt: new Date().toISOString(),
+    };
+    setMaps(prev => [...prev, newMap]);
+    setActiveMapId(newMap.id);
+    setNewMapName('');
+    setIsAdding(false);
+  };
+
+  const deleteMap = (id: string) => {
+    setMaps(prev => prev.filter(m => m.id !== id));
+    if (activeMapId === id) {
+      const remaining = maps.filter(m => m.id !== id);
+      setActiveMapId(remaining.length > 0 ? remaining[0].id : null);
+    }
+  };
+
+  const activeMap = maps.find(m => m.id === activeMapId);
+
+  return (
+    <section className="obsidian-panel rounded-3xl border border-white/5 overflow-hidden">
+      {/* Section Header */}
+      <div className="flex items-center justify-between px-6 py-4 border-b border-white/5">
+        <h3 className="text-slate-100 font-black text-xs uppercase tracking-[0.2em] flex items-center gap-2">
+          <span className="material-symbols-outlined text-primary text-sm">map</span>
+          Campaign Maps
+          {maps.length > 0 && (
+            <span className="text-[8px] bg-primary/10 text-primary border border-primary/20 px-1.5 py-0.5 rounded font-black">
+              {maps.length}
+            </span>
+          )}
+        </h3>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setIsAdding(v => !v)}
+            className="text-[8px] font-black text-primary/70 hover:text-primary uppercase tracking-widest border border-primary/20 px-3 py-1 rounded-xl hover:border-primary/40 transition-all"
+          >
+            + New Map
+          </button>
+          <button
+            onClick={() => setCollapsed(v => !v)}
+            className="size-7 flex items-center justify-center rounded-lg hover:bg-white/5 transition-all"
+            title={collapsed ? 'Expand map' : 'Collapse map'}
+          >
+            <span className="material-symbols-outlined text-sm text-slate-500">
+              {collapsed ? 'expand_more' : 'expand_less'}
+            </span>
+          </button>
+        </div>
+      </div>
+
+      {/* Map tab switcher */}
+      {maps.length > 1 && (
+        <div className="flex gap-1.5 px-4 pt-3 overflow-x-auto">
+          {maps.map(m => (
+            <div key={m.id} className="flex items-center gap-1 flex-shrink-0">
+              <button
+                onClick={() => setActiveMapId(m.id)}
+                className={`text-[9px] font-black px-3 py-1.5 rounded-lg uppercase tracking-widest transition-all border ${
+                  activeMapId === m.id
+                    ? 'bg-primary/15 border-primary/40 text-primary'
+                    : 'bg-white/5 border-white/10 text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                {m.name}
+              </button>
+              {maps.length > 1 && (
+                <button
+                  onClick={() => deleteMap(m.id)}
+                  className="size-5 flex items-center justify-center rounded text-slate-600 hover:text-red-400 transition-colors"
+                  title="Delete map"
+                >
+                  <span className="material-symbols-outlined text-[10px]">close</span>
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* New Map Form */}
+      <AnimatePresence>
+        {isAdding && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <div className="flex gap-2 p-4 border-b border-white/5">
+              <input
+                value={newMapName}
+                onChange={e => setNewMapName(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && addMap()}
+                placeholder="Map name (e.g. Faerun, The Underdark)…"
+                autoFocus
+                className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-slate-100 placeholder-slate-600 focus:outline-none focus:border-primary/40"
+              />
+              <button
+                onClick={addMap}
+                className="px-4 py-2 bg-primary/15 border border-primary/30 text-primary text-[9px] font-black uppercase tracking-widest rounded-xl hover:bg-primary/25 transition-all"
+              >
+                Create
+              </button>
+              <button
+                onClick={() => setIsAdding(false)}
+                className="px-3 py-2 text-slate-500 hover:text-slate-300 text-[9px] font-black uppercase"
+              >
+                Cancel
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Map Content */}
+      <AnimatePresence>
+        {!collapsed && (
+          <motion.div
+            initial={false}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            style={{ height: maps.length > 0 ? '500px' : 'auto' }}
+          >
+            {maps.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-16 text-center">
+                <span className="material-symbols-outlined text-4xl text-slate-700 mb-3">map</span>
+                <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-4">No maps yet</p>
+                <button
+                  onClick={() => setIsAdding(true)}
+                  className="text-[9px] font-black text-primary uppercase tracking-widest border border-primary/20 px-4 py-2 rounded-xl hover:bg-primary/10 transition-all"
+                >
+                  + Create First Map
+                </button>
+              </div>
+            ) : activeMap ? (
+              <div className="h-full">
+                <WorldMap campaignId={activeMap.id} />
+              </div>
+            ) : null}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+}
+
 export default function CampaignDashboard() {
-    const [campaigns, setCampaigns] = usePersistentState<Campaign[]>('mythic_campaigns', []);
-    const [savedCharacters] = usePersistentState<any[]>('mythic_saved_characters', []);
+    const [campaigns, setCampaigns] = useSyncedState<Campaign[]>('/api/campaigns', 'mythic_campaigns', []);
+    const [savedCharacters] = useSyncedState<any[]>('/api/characters', 'mythic_saved_characters', []);
     const [activeCampaignId, setActiveCampaignId] = useState<string | null>(null);
 
     // Auto-select first campaign if none selected
@@ -37,6 +443,9 @@ export default function CampaignDashboard() {
             setActiveCampaignId(campaigns[0].id);
         }
     }, [campaigns, activeCampaignId]);
+
+    const backupStatus = useAutoBackup();
+    const backupFileRef = useRef<HTMLInputElement>(null);
 
     const [isCreating, setIsCreating] = useState(false);
     const [isEditingCampaign, setIsEditingCampaign] = useState(false);
@@ -77,20 +486,24 @@ export default function CampaignDashboard() {
         setIsEditingCampaign(true);
     };
 
-    const handleUpdateCampaign = (e: React.FormEvent) => {
+    const handleUpdateCampaign = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!currentCampaign || !editCampaignData.name) return;
 
-        setCampaigns(prev => prev.map(c => {
-            if (c.id === currentCampaign.id) {
-                return {
-                    ...c,
-                    ...editCampaignData
-                };
-            }
-            return c;
-        }));
-        setIsEditingCampaign(false);
+        const updatedCampaign = { ...currentCampaign, ...editCampaignData };
+
+        try {
+            await fetch('/api/campaigns', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedCampaign)
+            });
+
+            setCampaigns(prev => prev.map(c => c.id === currentCampaign.id ? updatedCampaign : c));
+            setIsEditingCampaign(false);
+        } catch (err) {
+            console.error("Failed to update campaign on master:", err);
+        }
     };
 
     const activeParty = useMemo(() => {
@@ -103,65 +516,87 @@ export default function CampaignDashboard() {
         return savedCharacters.filter(char => !currentCampaign.partyIds?.includes(char.id) && !char.retired);
     }, [savedCharacters, currentCampaign]);
 
-    const handleCreate = (e: React.FormEvent) => {
+    const handleCreate = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!newCampaign.name) return;
 
         const campaign: Campaign = {
             ...newCampaign,
-            id: crypto.randomUUID(),
+            id: generateSafeId(),
             partyIds: [],
             status: "Starting",
             nextSession: new Date().toISOString(),
             logs: []
         };
 
-        setCampaigns(prev => [...prev, campaign]);
-        setActiveCampaignId(campaign.id);
-        setIsCreating(false);
+        try {
+            await fetch('/api/campaigns', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(campaign)
+            });
+
+            setCampaigns(prev => [...prev, campaign]);
+            setActiveCampaignId(campaign.id);
+            setIsCreating(false);
+        } catch (err) {
+            console.error("Failed to project campaign to master:", err);
+        }
     };
 
-    const toggleHeroRecruitment = (heroId: string) => {
+    const toggleHeroRecruitment = async (heroId: string) => {
         if (!currentCampaign) return;
 
-        setCampaigns(prev => prev.map(c => {
-            if (c.id === currentCampaign.id) {
-                const partyIds = c.partyIds || [];
-                const isRecruited = partyIds.includes(heroId);
-                return {
-                    ...c,
-                    partyIds: isRecruited
-                        ? partyIds.filter(id => id !== heroId)
-                        : [...partyIds, heroId]
-                };
-            }
-            return c;
-        }));
+        const partyIds = currentCampaign.partyIds || [];
+        const isRecruited = partyIds.includes(heroId);
+        const nextPartyIds = isRecruited
+            ? partyIds.filter(id => id !== heroId)
+            : [...partyIds, heroId];
+
+        const updatedCampaign = { ...currentCampaign, partyIds: nextPartyIds };
+
+        try {
+            await fetch('/api/campaigns', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedCampaign)
+            });
+
+            setCampaigns(prev => prev.map(c => c.id === currentCampaign.id ? updatedCampaign : c));
+        } catch (err) {
+            console.error("Failed to sync party update to master:", err);
+        }
     };
 
-    const handleAddLog = (e: React.FormEvent) => {
+    const handleAddLog = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!currentCampaign || !newLog.title) return;
 
         const logEntry: CampaignLog = {
-            id: crypto.randomUUID(),
+            id: generateSafeId(),
             date: new Date().toLocaleDateString(),
             title: newLog.title,
             content: newLog.content
         };
 
-        setCampaigns(prev => prev.map(c => {
-            if (c.id === currentCampaign.id) {
-                return {
-                    ...c,
-                    logs: [logEntry, ...(c.logs || [])]
-                };
-            }
-            return c;
-        }));
+        const updatedCampaign = {
+            ...currentCampaign,
+            logs: [logEntry, ...(currentCampaign.logs || [])]
+        };
 
-        setNewLog({ title: '', content: '' });
-        setIsLogging(false);
+        try {
+            await fetch('/api/campaigns', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedCampaign)
+            });
+
+            setCampaigns(prev => prev.map(c => c.id === currentCampaign.id ? updatedCampaign : c));
+            setNewLog({ title: '', content: '' });
+            setIsLogging(false);
+        } catch (err) {
+            console.error("Failed to sync chronicle to master:", err);
+        }
     };
 
     const [deleteLogTargetId, setDeleteLogTargetId] = useState<string | null>(null);
@@ -386,6 +821,15 @@ export default function CampaignDashboard() {
                 </div>
 
                 <div className="space-y-8">
+                    {/* Party Status (live from combat) */}
+                    <PartyStatusWidget />
+
+                    {/* Recent Encounters */}
+                    <RecentEncountersWidget />
+
+                    {/* Location Tracker */}
+                    {currentCampaign && <LocationTrackerWidget campaignId={currentCampaign.id} />}
+
                     {/* DM Tools */}
                     <section className="obsidian-panel rounded-3xl p-8 border border-white/5">
                         <h3 className="text-slate-100 font-black text-xs uppercase tracking-[0.2em] mb-8">Master Utilities</h3>
@@ -420,6 +864,33 @@ export default function CampaignDashboard() {
                                     <p className="text-[8px] text-slate-500 font-bold uppercase tracking-tighter">Manage master adventurer roster</p>
                                 </div>
                             </Link>
+                            <Link href="/homebrew" className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-amber-500/10 hover:border-amber-500/20 transition-all group text-left">
+                                <div className="size-10 rounded-xl bg-white/5 flex items-center justify-center text-slate-500 group-hover:text-amber-400 transition-colors">
+                                    <span className="material-symbols-outlined text-lg">science</span>
+                                </div>
+                                <div>
+                                    <p className="text-[10px] font-black text-slate-200 uppercase">Homebrew Workshop</p>
+                                    <p className="text-[8px] text-slate-500 font-bold uppercase tracking-tighter">Custom monsters, spells & items</p>
+                                </div>
+                            </Link>
+                            <Link href="/spells" className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-primary/10 hover:border-primary/20 transition-all group text-left">
+                                <div className="size-10 rounded-xl bg-white/5 flex items-center justify-center text-slate-500 group-hover:text-primary transition-colors">
+                                    <span className="material-symbols-outlined text-lg">auto_stories</span>
+                                </div>
+                                <div>
+                                    <p className="text-[10px] font-black text-slate-200 uppercase">Spellbook</p>
+                                    <p className="text-[8px] text-slate-500 font-bold uppercase tracking-tighter">Browse & prepare spells</p>
+                                </div>
+                            </Link>
+                            <Link href="/world-map" className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-blue-500/10 hover:border-blue-500/20 transition-all group text-left">
+                                <div className="size-10 rounded-xl bg-white/5 flex items-center justify-center text-slate-500 group-hover:text-blue-400 transition-colors">
+                                    <span className="material-symbols-outlined text-lg">open_in_full</span>
+                                </div>
+                                <div>
+                                    <p className="text-[10px] font-black text-slate-200 uppercase">Full Map View</p>
+                                    <p className="text-[8px] text-slate-500 font-bold uppercase tracking-tighter">Open standalone world map</p>
+                                </div>
+                            </Link>
                         </div>
                     </section>
 
@@ -439,8 +910,31 @@ export default function CampaignDashboard() {
                             ))}
                         </div>
                     </section>
+
+                    {/* Network Access Panel */}
+                    <section className="obsidian-panel rounded-3xl p-8 border border-white/5 relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl -z-10" />
+                        <h3 className="text-slate-100 font-black text-xs uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                            <span className="material-symbols-outlined text-primary text-sm">cell_tower</span>
+                            iPad Connect
+                        </h3>
+                        <div className="space-y-4">
+                            <div className="p-4 rounded-xl bg-white/5 border border-white/5 space-y-2">
+                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Local Network URL</p>
+                                <code className="block p-2 bg-black/40 rounded-lg text-primary text-[11px] font-mono break-all selection:bg-primary/30">
+                                    http://192.168.4.39:3000
+                                </code>
+                            </div>
+                            <p className="text-slate-500 text-[9px] leading-relaxed italic">
+                                Server is restricted to your local network for privacy. Open this URL on your iPad to access your campaign.
+                            </p>
+                        </div>
+                    </section>
                 </div>
             </div>
+
+            {/* Campaign Maps - Full Width */}
+            <CampaignMapsWidget campaignId={currentCampaign.id} />
 
             {/* Recuitment Modal */}
             <AnimatePresence>
@@ -468,7 +962,12 @@ export default function CampaignDashboard() {
                                     availableHeroes.map(hero => (
                                         <div key={hero.id} className="bg-white/5 border border-white/5 rounded-2xl p-4 flex gap-4 items-center group transition-all hover:bg-white/10 hover:border-primary/20">
                                             <div className="size-14 rounded-xl bg-slate-900 border border-white/10 relative overflow-hidden">
-                                                {hero.visualUrl && <Image src={hero.visualUrl} alt={hero.name} fill className="object-cover" />}
+                                                <Image 
+                                                    src={hero.imageUrl || hero.image || hero.visualUrl || "/placeholder-avatar.jpg"} 
+                                                    alt={hero.name} 
+                                                    fill 
+                                                    className="object-cover" 
+                                                />
                                             </div>
                                             <div className="flex-grow">
                                                 <p className="text-xs font-black text-slate-100 uppercase">{hero.name}</p>
@@ -590,6 +1089,69 @@ export default function CampaignDashboard() {
                 confirmLabel="Delete Entry"
                 icon="history"
             />
+            {/* Auto-Backup Panel */}
+            <div className="mt-8 obsidian-panel rounded-3xl p-6 border border-white/5">
+                <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-[10px] font-black text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                        <span className="material-symbols-outlined text-primary text-sm">backup</span>
+                        Data Vault
+                    </h3>
+                    {backupStatus.lastBackupTime && (
+                        <p className="text-[8px] text-slate-600 font-bold uppercase">
+                            Last backup: {new Date(backupStatus.lastBackupTime).toLocaleTimeString()}
+                        </p>
+                    )}
+                </div>
+                <div className="flex gap-3 flex-wrap">
+                    <button
+                        onClick={() => { exportBackup(); }}
+                        className="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[9px] font-black uppercase tracking-widest hover:bg-emerald-500/20 transition-all"
+                    >
+                        <span className="material-symbols-outlined text-xs">download</span>
+                        Export Backup
+                    </button>
+                    <button
+                        onClick={() => backupFileRef.current?.click()}
+                        className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[9px] font-black uppercase tracking-widest hover:bg-blue-500/20 transition-all"
+                    >
+                        <span className="material-symbols-outlined text-xs">upload</span>
+                        Import Backup
+                    </button>
+                    <input
+                        ref={backupFileRef}
+                        type="file"
+                        accept=".json"
+                        className="hidden"
+                        onChange={async (e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                                try {
+                                    const result = await importBackup(file);
+                                    alert(`Restored ${result.keysRestored} data keys. Reloading...`);
+                                    window.location.reload();
+                                } catch (err) {
+                                    alert('Failed to import backup: ' + (err as Error).message);
+                                }
+                            }
+                        }}
+                    />
+                    <button
+                        onClick={() => {
+                            const result = restoreAutoBackup();
+                            if (result) {
+                                alert(`Restored ${result.keysRestored} keys from auto-backup. Reloading...`);
+                                window.location.reload();
+                            } else {
+                                alert('No auto-backup found.');
+                            }
+                        }}
+                        className="flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[9px] font-black uppercase tracking-widest hover:bg-amber-500/20 transition-all"
+                    >
+                        <span className="material-symbols-outlined text-xs">restore</span>
+                        Restore Auto-Backup
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }

@@ -9,6 +9,8 @@ export interface RollResult {
     modifier: number;
     total: number;
     type: 'normal' | 'advantage' | 'disadvantage';
+    isCritical?: boolean;
+    isFumble?: boolean;
 }
 
 export class DiceEngine {
@@ -49,18 +51,19 @@ export class DiceEngine {
 
             if (type === 'normal') {
                 const rolls = Array.from({ length: count }, () => this.getRandomInt(1, sides));
-                return {
+                const res: RollResult = {
                     notation,
                     rolls,
                     modifier,
                     total: rolls.reduce((a, b) => a + b, 0) + modifier,
                     type
                 };
+                if (sides === 20 && count === 1) {
+                    if (rolls[0] === 20) res.isCritical = true;
+                    if (rolls[0] === 1) res.isFumble = true;
+                }
+                return res;
             } else {
-                // Advantage/Disadvantage (usually only for single d20, but we can generalize)
-                // D&D rules: Roll twice, take high (adv) or low (dis).
-                // If notation was "2d20adv", it's slightly ambiguous, usually it means roll the set twice?
-                // Standard D&D practice: roll a single d20 twice.
                 const firstRolls = Array.from({ length: count }, () => this.getRandomInt(1, sides));
                 const secondRolls = Array.from({ length: count }, () => this.getRandomInt(1, sides));
 
@@ -71,13 +74,18 @@ export class DiceEngine {
                     ? (firstTotal >= secondTotal ? firstRolls : secondRolls)
                     : (firstTotal <= secondTotal ? firstRolls : secondRolls);
 
-                return {
+                const res: RollResult = {
                     notation,
                     rolls: finalRolls,
                     modifier,
                     total: finalRolls.reduce((a, b) => a + b, 0) + modifier,
                     type
                 };
+                if (sides === 20 && count === 1) {
+                    if (finalRolls[0] === 20) res.isCritical = true;
+                    if (finalRolls[0] === 1) res.isFumble = true;
+                }
+                return res;
             }
         } else {
             // Just a number?

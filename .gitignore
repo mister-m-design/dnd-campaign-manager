@@ -42,3 +42,12 @@ next-env.d.ts
 
 /src/generated/prisma
 .appdeploy
+
+# local database
+prisma/*.db
+prisma/*.db-journal
+
+# AI agents
+.claude/
+.gemini/
+.agents/

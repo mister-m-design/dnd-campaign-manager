@@ -1,30 +1,27 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider   = "prisma-client-js"
+  engineType = "library"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
-// NextAuth Models
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -38,25 +35,16 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  role          UserRole  @default(PLAYER)
-  accounts      Account[]
-  sessions      Session[]
-  
-  // Custom relations
-  ownedCampaigns   Campaign[]  @relation("DungeonMaster")
-  playerCampaigns  Campaign[]  @relation("Players")
-  characters       Character[] @relation("CharacterOwner")
-}
-
-enum UserRole {
-  PLAYER
-  DM
-  ADMIN
+  id             String      @id @default(cuid())
+  name           String?
+  email          String?     @unique
+  emailVerified  DateTime?
+  image          String?
+  role           String      @default("PLAYER")
+  accounts       Account[]
+  ownedCampaigns Campaign[]  @relation("DungeonMaster")
+  characters     Character[] @relation("CharacterOwner")
+  sessions       Session[]
 }
 
 model VerificationToken {
@@ -67,105 +55,86 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-// D&D Specific Models
-
 model Campaign {
-  id          String   @id @default(cuid())
+  id          String        @id @default(cuid())
   name        String
   description String?
   setting     String?
   dmId        String
-  dm          User     @relation("DungeonMaster", fields: [dmId], references: [id])
-  players     User[]   @relation("Players")
-  characters  Character[]
+  partyIds    String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
   adventures  Adventure[]
-  npcs        NPC[]
+  dm          User          @relation("DungeonMaster", fields: [dmId], references: [id])
+  characters  Character[]
   sessions    GameSession[]
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  npcs        NPC[]
 }
 
 model Character {
-  id          String   @id @default(cuid())
-  name        String
-  ownerId     String
-  owner       User     @relation("CharacterOwner", fields: [ownerId], references: [id])
-  campaignId  String?
-  campaign    Campaign? @relation(fields: [campaignId], references: [id])
-  
-  // Basic Info
-  race        String
-  class       String
-  level       Int      @default(1)
-  background  String
-  alignment   String
-  
-  // Stats
-  strength     Int @default(10)
-  dexterity    Int @default(10)
-  constitution Int @default(10)
-  intelligence Int @default(10)
-  wisdom       Int @default(10)
-  charisma     Int @default(10)
-  
-  // Derived / Dynamic
-  currentHp    Int @default(10)
-  maxHp        Int @default(10)
-  tempHp       Int @default(0)
-  ac           Int @default(10)
-  initiative   Int @default(0)
-  speed        Int @default(30)
-  
-  // Details JSON for flexability (traits, bond, flaw, etc.)
-  details      Json?
-  
-  // Inventory & Spells
-  inventory    Json?
-  spells       Json?
-  
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id           String    @id @default(cuid())
+  name         String
+  ownerId      String
+  campaignId   String?
+  race         String
+  class        String
+  level        Int       @default(1)
+  background   String
+  alignment    String
+  strength     Int       @default(10)
+  dexterity    Int       @default(10)
+  constitution Int       @default(10)
+  intelligence Int       @default(10)
+  wisdom       Int       @default(10)
+  charisma     Int       @default(10)
+  currentHp    Int       @default(10)
+  maxHp        Int       @default(10)
+  tempHp       Int       @default(0)
+  ac           Int       @default(10)
+  initiative   Int       @default(0)
+  speed        Int       @default(30)
+  details      String?
+  inventory    String?
+  spells       String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  image        String?
+  campaign     Campaign? @relation(fields: [campaignId], references: [id])
+  owner        User      @relation("CharacterOwner", fields: [ownerId], references: [id])
 }
 
 model NPC {
-  id          String   @id @default(cuid())
-  name        String
-  type        String   @default("Monster") // NPC, Monster, Boss
-  cr          String?  // Challenge Rating
-  campaignId  String?
-  campaign    Campaign? @relation(fields: [campaignId], references: [id])
-  
-  stats       Json     // Full stat block JSON
-  actions     Json     // Attacks, abilities JSON
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String    @id @default(cuid())
+  name       String
+  type       String    @default("Monster")
+  cr         String?
+  campaignId String?
+  stats      String?
+  actions    String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  campaign   Campaign? @relation(fields: [campaignId], references: [id])
 }
 
 model Adventure {
-  id          String   @id @default(cuid())
-  title       String
-  summary     String?
-  campaignId  String
-  campaign    Campaign @relation(fields: [campaignId], references: [id])
-  
-  acts        Json     // Structured list of acts/chapters/scenes
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String   @id @default(cuid())
+  title      String
+  summary    String?
+  campaignId String
+  acts       String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
 }
 
 model GameSession {
-  id          String   @id @default(cuid())
-  number      Int
-  date        DateTime @default(now())
-  campaignId  String
-  campaign    Campaign @relation(fields: [campaignId], references: [id])
-  
-  notes       String?
-  recap       String?
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String   @id @default(cuid())
+  number     Int
+  date       DateTime @default(now())
+  campaignId String
+  notes      String?
+  recap      String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
 }

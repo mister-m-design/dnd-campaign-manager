@@ -18,13 +18,13 @@
         "description": "Made from tough but flexible leather, studded leather is reinforced with close-set rivets or spikes."
     },
     {
-        "id": "chain-mail",
-        "name": "Chain Mail",
+        "id": "chain-shirt",
+        "name": "Chain Shirt",
         "type": "Armor",
-        "ac": 16,
-        "base": "16",
-        "weight": "55 lbs",
-        "description": "Made of interlocking metal rings, chain mail includes a layer of quilted fabric worn underneath."
+        "ac": 13,
+        "base": "13 + DEX (max 2)",
+        "weight": "20 lbs",
+        "description": "Made of interlocking metal rings, a chain shirt is worn between layers of clothing or leather."
     },
     {
         "id": "scale-mail",
@@ -34,6 +34,51 @@
         "base": "14 + DEX (max 2)",
         "weight": "45 lbs",
         "description": "This armor consists of a coat and leggings of leather covered with overlapping pieces of metal."
+    },
+    {
+        "id": "breastplate",
+        "name": "Breastplate",
+        "type": "Armor",
+        "ac": 14,
+        "base": "14 + DEX (max 2)",
+        "weight": "20 lbs",
+        "description": "A fitted metal chest piece worn with supple leather."
+    },
+    {
+        "id": "half-plate",
+        "name": "Half Plate",
+        "type": "Armor",
+        "ac": 15,
+        "base": "15 + DEX (max 2)",
+        "weight": "40 lbs",
+        "description": "Consists of shaped metal plates that cover most of the wearer's body."
+    },
+    {
+        "id": "ring-mail",
+        "name": "Ring Mail",
+        "type": "Armor",
+        "ac": 14,
+        "base": "14",
+        "weight": "40 lbs",
+        "description": "Leather armor with heavy rings sewn into it."
+    },
+    {
+        "id": "chain-mail",
+        "name": "Chain Mail",
+        "type": "Armor",
+        "ac": 16,
+        "base": "16",
+        "weight": "55 lbs",
+        "description": "Made of interlocking metal rings, chain mail includes a layer of quilted fabric worn underneath."
+    },
+    {
+        "id": "splint-armor",
+        "name": "Splint Armor",
+        "type": "Armor",
+        "ac": 17,
+        "base": "17",
+        "weight": "60 lbs",
+        "description": "Made of narrow vertical strips of metal riveted to a backing of leather."
     },
     {
         "id": "plate-armor",
@@ -54,6 +99,24 @@
         "description": "A versatile blade that can be concealed."
     },
     {
+        "id": "handaxe",
+        "name": "Handaxe",
+        "type": "Weapon",
+        "damage": "1d6",
+        "property": "Light, Thrown (20/60)",
+        "weight": "2 lbs",
+        "description": "A light axe for hacking and throwing."
+    },
+    {
+        "id": "javelin",
+        "name": "Javelin",
+        "type": "Weapon",
+        "damage": "1d6",
+        "property": "Thrown (30/120)",
+        "weight": "2 lbs",
+        "description": "A light spear designed for throwing."
+    },
+    {
         "id": "mace",
         "name": "Mace",
         "type": "Weapon",
@@ -63,22 +126,31 @@
         "description": "A heavy-headed club for crushing armor."
     },
     {
-        "id": "longsword",
-        "name": "Longsword",
+        "id": "quarterstaff",
+        "name": "Quarterstaff",
+        "type": "Weapon",
+        "damage": "1d6",
+        "property": "Versatile (1d8)",
+        "weight": "4 lbs",
+        "description": "A simple wooden staff."
+    },
+    {
+        "id": "spear",
+        "name": "Spear",
+        "type": "Weapon",
+        "damage": "1d6",
+        "property": "Thrown (20/60), Versatile (1d8)",
+        "weight": "3 lbs",
+        "description": "A simple polearm with a pointed tip."
+    },
+    {
+        "id": "battleaxe",
+        "name": "Battleaxe",
         "type": "Weapon",
         "damage": "1d8",
         "property": "Versatile (1d10)",
-        "weight": "3 lbs",
-        "description": "A classic blade favored by knights and adventurers."
-    },
-    {
-        "id": "shortbow",
-        "name": "Shortbow",
-        "type": "Weapon",
-        "damage": "1d6",
-        "property": "Ammunition, Range (80/320), Two-Handed",
-        "weight": "2 lbs",
-        "description": "A light wood bow that is easy to handle."
+        "weight": "4 lbs",
+        "description": "A versatile axe favored by warriors."
     },
     {
         "id": "greataxe",
@@ -90,6 +162,24 @@
         "description": "A massive axe capable of devastating blows."
     },
     {
+        "id": "greatsword",
+        "name": "Greatsword",
+        "type": "Weapon",
+        "damage": "2d6",
+        "property": "Heavy, Two-Handed",
+        "weight": "6 lbs",
+        "description": "A massive two-handed sword."
+    },
+    {
+        "id": "longsword",
+        "name": "Longsword",
+        "type": "Weapon",
+        "damage": "1d8",
+        "property": "Versatile (1d10)",
+        "weight": "3 lbs",
+        "description": "A classic blade favored by knights and adventurers."
+    },
+    {
         "id": "rapier",
         "name": "Rapier",
         "type": "Weapon",
@@ -97,6 +187,24 @@
         "property": "Finesse",
         "weight": "2 lbs",
         "description": "A slender blade designed for swift lunges."
+    },
+    {
+        "id": "scimitar",
+        "name": "Scimitar",
+        "type": "Weapon",
+        "damage": "1d6",
+        "property": "Finesse, Light",
+        "weight": "3 lbs",
+        "description": "A curved blade for slashing."
+    },
+    {
+        "id": "shortsword",
+        "name": "Shortsword",
+        "type": "Weapon",
+        "damage": "1d6",
+        "property": "Finesse, Light",
+        "weight": "2 lbs",
+        "description": "A versatile short-range blade."
     },
     {
         "id": "warhammer",
@@ -108,6 +216,24 @@
         "description": "A versatile hammer for crushing foes."
     },
     {
+        "id": "shortbow",
+        "name": "Shortbow",
+        "type": "Weapon",
+        "damage": "1d6",
+        "property": "Ammunition, Range (80/320), Two-Handed",
+        "weight": "2 lbs",
+        "description": "A light wood bow that is easy to handle."
+    },
+    {
+        "id": "longbow",
+        "name": "Longbow",
+        "type": "Weapon",
+        "damage": "1d8",
+        "property": "Ammunition, Range (150/600), Heavy, Two-Handed",
+        "weight": "2 lbs",
+        "description": "A powerful bow for long-range engagement."
+    },
+    {
         "id": "hand-crossbow",
         "name": "Hand Crossbow",
         "type": "Weapon",
@@ -115,6 +241,15 @@
         "property": "Ammunition, Light, Range (30/120)",
         "weight": "3 lbs",
         "description": "A small, one-handed crossbow."
+    },
+    {
+        "id": "light-crossbow",
+        "name": "Light Crossbow",
+        "type": "Weapon",
+        "damage": "1d8",
+        "property": "Ammunition, Range (80/320), Two-Handed",
+        "weight": "5 lbs",
+        "description": "A simple crossbow."
     },
     {
         "id": "shield",
@@ -175,18 +310,6 @@
         "description": "Using a crowbar grants advantage on Strength checks where its leverage can be applied."
     },
     {
-        "id": "grappling-hook",
-        "name": "Grappling Hook",
-        "type": "Gear",
-        "description": "A metal hook for climbing."
-    },
-    {
-        "id": "lantern-hooded",
-        "name": "Hooded Lantern",
-        "type": "Gear",
-        "description": "Casts bright light in a 30-foot radius and dim light for an additional 30 feet."
-    },
-    {
         "id": "rope-hempen",
         "name": "Hempen Rope (50ft)",
         "type": "Gear",
@@ -217,28 +340,10 @@
         "description": "Used for crafting and repairing metal items."
     },
     {
-        "id": "tinkers-tools",
-        "name": "Tinker's Tools",
-        "type": "Tools",
-        "description": "Used for repairing mundane metal items."
-    },
-    {
-        "id": "arcane-focus-crystal",
-        "name": "Arcane Focus: Crystal",
-        "type": "Focus",
-        "description": "A crystal used as a spellcasting focus for arcane spells."
-    },
-    {
         "id": "arcane-focus-orb",
         "name": "Arcane Focus: Orb",
         "type": "Focus",
         "description": "An orb used as a spellcasting focus for arcane spells."
-    },
-    {
-        "id": "arcane-focus-rod",
-        "name": "Arcane Focus: Rod",
-        "type": "Focus",
-        "description": "A rod used as a spellcasting focus for arcane spells."
     },
     {
         "id": "arcane-focus-staff",
@@ -247,39 +352,15 @@
         "description": "A staff used as a spellcasting focus for arcane spells."
     },
     {
-        "id": "arcane-focus-wand",
-        "name": "Arcane Focus: Wand",
-        "type": "Focus",
-        "description": "A wand used as a spellcasting focus for arcane spells."
-    },
-    {
-        "id": "druidic-focus-mistletoe",
-        "name": "Druidic Focus: Mistletoe",
-        "type": "Focus",
-        "description": "A sprig of mistletoe used as a druidic spellcasting focus."
-    },
-    {
-        "id": "druidic-focus-totem",
-        "name": "Druidic Focus: Totem",
-        "type": "Focus",
-        "description": "An object like a carved piece of wood used as a druidic spellcasting focus."
-    },
-    {
         "id": "druidic-focus-staff",
         "name": "Druidic Focus: Wooden Staff",
         "type": "Focus",
         "description": "A wooden staff used as a druidic spellcasting focus."
     },
     {
-        "id": "druidic-focus-wand",
-        "name": "Druidic Focus: Yew Wand",
-        "type": "Focus",
-        "description": "A yew wand used as a druidic spellcasting focus."
-    },
-    {
         "id": "component-pouch",
         "name": "Component Pouch",
         "type": "Focus",
-        "description": "A small, airtight leather pouch that contains all the material components you need to cast your spells, except those with a specific gold cost."
+        "description": "A small leather pouch containing spell components."
     }
 ]

@@ -1,15 +1,16 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import CharacterCreator from '@/components/CharacterCreator';
+import CharacterBuilder from '@/components/CharacterBuilder/CharacterBuilder';
 import { useParams, useRouter } from 'next/navigation';
 import { usePersistentState } from '@/hooks/usePersistentState';
+import { Character } from '@/types';
 
 export default function EditCharacterPage() {
     const params = useParams();
     const router = useRouter();
-    const [savedCharacters] = usePersistentState<any[]>('mythic_saved_characters', []);
-    const [characterToEdit, setCharacterToEdit] = useState<any>(null);
+    const [savedCharacters] = usePersistentState<Character[]>('mythic_saved_characters', []);
+    const [characterToEdit, setCharacterToEdit] = useState<Character | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -39,18 +40,5 @@ export default function EditCharacterPage() {
         return null;
     }
 
-    return (
-        <main className="min-h-screen bg-[#050505] p-4 md:p-8">
-            <div className="max-w-7xl mx-auto">
-                <div className="flex items-center gap-4 mb-8">
-                    <button onClick={() => router.back()} className="size-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all">
-                        <span className="material-symbols-outlined text-slate-400">arrow_back</span>
-                    </button>
-                    <h1 className="text-3xl font-black text-white uppercase tracking-tighter">Edit Your Hero</h1>
-                </div>
-
-                <CharacterCreator initialData={characterToEdit} isEditing={true} />
-            </div>
-        </main>
-    );
+    return <CharacterBuilder initialData={characterToEdit} isEditing={true} />;
 }

@@ -1,0 +1,173 @@
+[
+    {
+        "name": "Acolyte",
+        "description": "You spent your life in a temple, learning sacred rites and providing spiritual guidance.",
+        "skillProficiencies": ["Insight", "Religion"],
+        "toolProficiencies": ["Calligrapher's Supplies"],
+        "statOptions": ["INT", "WIS", "CHA"],
+        "feat": "Magic Initiate (Cleric)",
+        "equipment": "Holy Symbol, Prayer Book, 5 sticks of Incense, Vestments, 15 GP"
+    },
+    {
+        "name": "Artisan",
+        "description": "You were trained in a craft, from blacksmithing to weaving.",
+        "skillProficiencies": ["Investigation", "Persuasion"],
+        "toolProficiencies": ["Artisan's Tools"],
+        "statOptions": ["STR", "DEX", "INT"],
+        "feat": "Crafter",
+        "equipment": "Abacus, Artisan's Tools, Merchant's Scale, 25 GP"
+    },
+    {
+        "name": "Charlatan",
+        "description": "You know how to manipulate people and use disguises to get what you want.",
+        "skillProficiencies": ["Deception", "Sleight of Hand"],
+        "toolProficiencies": ["Forgery Kit"],
+        "statOptions": ["DEX", "CON", "CHA"],
+        "feat": "Skilled",
+        "equipment": "Costume, Fine Clothes, Forgery Kit, 15 GP"
+    },
+    {
+        "name": "Criminal",
+        "description": "You made a living through illegal activities, from burglary to smuggling.",
+        "skillProficiencies": ["Deception", "Stealth"],
+        "toolProficiencies": ["Thieves' Tools"],
+        "statOptions": ["DEX", "CON", "CHA"],
+        "feat": "Alert",
+        "equipment": "Crowbar, Dagger (2), Thieves' Tools, 16 GP"
+    },
+    {
+        "name": "Entertainer",
+        "description": "You thrive on performance, whether as a musician, actor, or acrobat.",
+        "skillProficiencies": ["Acrobatics", "Performance"],
+        "toolProficiencies": ["Musical Instrument"],
+        "statOptions": ["DEX", "CHA", "STR"],
+        "feat": "Musician",
+        "equipment": "Costume, Musical Instrument, Mirror (Steel), 11 GP"
+    },
+    {
+        "name": "Farmer",
+        "description": "You lived a simple life working the land and raising livestock.",
+        "skillProficiencies": ["Animal Handling", "Nature"],
+        "toolProficiencies": ["Carpenter's Tools"],
+        "statOptions": ["STR", "CON", "WIS"],
+        "feat": "Tough",
+        "equipment": "Sickle, Carpenter's Tools, Iron Pot, 23 GP"
+    },
+    {
+        "name": "Folk Hero",
+        "description": "You come from a humble social rank, but you are destined for so much more.",
+        "skillProficiencies": ["Animal Handling", "Survival"],
+        "toolProficiencies": ["Artisan's Tools"],
+        "statOptions": ["STR", "DEX", "CON"],
+        "feat": "Tough",
+        "equipment": "Artisan's Tools, Shovel, Iron Pot, Common Clothes, 10 GP"
+    },
+    {
+        "name": "Guard",
+        "description": "You were part of a city watch or a noble's personal guard.",
+        "skillProficiencies": ["Athletics", "Perception"],
+        "toolProficiencies": ["Gaming Set"],
+        "statOptions": ["STR", "DEX", "WIS"],
+        "feat": "Alert",
+        "equipment": "Spear, Shield, Gaming Set, 12 GP"
+    },
+    {
+        "name": "Guide",
+        "description": "You helped travelers navigate wilderness and dangerous terrain.",
+        "skillProficiencies": ["Stealth", "Survival"],
+        "toolProficiencies": ["Cartographer's Tools"],
+        "statOptions": ["DEX", "CON", "WIS"],
+        "feat": "Magic Initiate (Druid)",
+        "equipment": "Shortbow, Arrows (20), Quiver, 13 GP"
+    },
+    {
+        "name": "Hermit",
+        "description": "You lived in isolation, seeking spiritual enlightenment or profound secrets.",
+        "skillProficiencies": ["Medicine", "Religion"],
+        "toolProficiencies": ["Herbalism Kit"],
+        "statOptions": ["CON", "INT", "WIS"],
+        "feat": "Healer",
+        "equipment": "Quarterstaff, Herbalism Kit, Bedroll, 15 GP"
+    },
+    {
+        "name": "Merchant",
+        "description": "You traded goods and services, traveling between cities or managing a shop.",
+        "skillProficiencies": ["Animal Handling", "Persuasion"],
+        "toolProficiencies": ["Navigator's Tools"],
+        "statOptions": ["CON", "INT", "CHA"],
+        "feat": "Lucky",
+        "equipment": "Pouch, Merchant's Scale, Navigator's Tools, 18 GP"
+    },
+    {
+        "name": "Noble",
+        "description": "You were born into a family of high social standing and privilege.",
+        "skillProficiencies": ["History", "Persuasion"],
+        "toolProficiencies": ["Gaming Set"],
+        "statOptions": ["INT", "WIS", "CHA"],
+        "feat": "Skilled",
+        "equipment": "Fine Clothes, Signet Ring, Gaming Set, 24 GP"
+    },
+    {
+        "name": "Outlander",
+        "description": "You grew up in the wilds, far from civilization and the comforts of town and city.",
+        "skillProficiencies": ["Athletics", "Survival"],
+        "toolProficiencies": ["Musical Instrument"],
+        "statOptions": ["STR", "CON", "WIS"],
+        "feat": "Tough",
+        "equipment": "Staff, Hunting Trap, Trophy from Animal, Traveler's Clothes, 10 GP"
+    },
+    {
+        "name": "Sage",
+        "description": "You dedicated your life to the pursuit of knowledge and research.",
+        "skillProficiencies": ["Arcana", "History"],
+        "toolProficiencies": ["Calligrapher's Supplies"],
+        "statOptions": ["CON", "INT", "WIS"],
+        "feat": "Magic Initiate (Wizard)",
+        "equipment": "Quarterstaff, Calligrapher's Supplies, 8 GP"
+    },
+    {
+        "name": "Sailor",
+        "description": "You are a master of the sea, having served on various ships.",
+        "skillProficiencies": ["Acrobatics", "Perception"],
+        "toolProficiencies": ["Navigator's Tools"],
+        "statOptions": ["STR", "DEX", "WIS"],
+        "feat": "Tavern Brawler",
+        "equipment": "Dagger, Navigator's Tools, Silk Rope, 10 GP"
+    },
+    {
+        "name": "Scribe",
+        "description": "You performed clerical work, transcribing documents and maintaining records.",
+        "skillProficiencies": ["Investigation", "Perception"],
+        "toolProficiencies": ["Calligrapher's Supplies"],
+        "statOptions": ["DEX", "INT", "WIS"],
+        "feat": "Skilled",
+        "equipment": "Ink (1 ounce), Ink Pen, 5 sheets of Paper, 15 GP"
+    },
+    {
+        "name": "Soldier",
+        "description": "You served in an army or mercenary group, experienced in war.",
+        "skillProficiencies": ["Athletics", "Intimidation"],
+        "toolProficiencies": ["Gaming Set"],
+        "statOptions": ["STR", "DEX", "CON"],
+        "feat": "Savage Attacker",
+        "equipment": "Spear, Shield, Gaming Set, 14 GP"
+    },
+    {
+        "name": "Urchin",
+        "description": "You grew up on the streets, alone and poor, survived by your wits.",
+        "skillProficiencies": ["Sleight of Hand", "Stealth"],
+        "toolProficiencies": ["Thieves' Tools"],
+        "statOptions": ["DEX", "CON", "WIS"],
+        "feat": "Alert",
+        "equipment": "Small Knife, Map of Home City, Pet Mouse, 10 GP"
+    },
+    {
+        "name": "Wayfarer",
+        "description": "You are a traveler and wanderer, accustomed to life on the road.",
+        "skillProficiencies": ["Insight", "Survival"],
+        "toolProficiencies": ["Thieves' Tools"],
+        "statOptions": ["DEX", "WIS", "CHA"],
+        "feat": "Lucky",
+        "equipment": "Staff, Bedroll, Thieves' Tools, 15 GP"
+    }
+]

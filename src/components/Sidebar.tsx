@@ -11,8 +11,9 @@ const NAV_ITEMS = [
     { name: 'Characters', icon: 'shield_person', href: '/characters' },
     { name: 'Bestiary', icon: 'pest_control', href: '/npcs' },
     { name: 'Combat', icon: 'swords', href: '/combat' },
-    { name: 'Library', icon: 'inventory_2', href: '/combat/library' },
+    { name: 'Library', icon: 'menu_book', href: '/library' },
     { name: 'Spellbook', icon: 'auto_stories', href: '/spells' },
+    { name: 'Homebrew', icon: 'science', href: '/homebrew' },
 ];
 
 export default function Sidebar() {
